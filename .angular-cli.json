@@ -19,9 +19,49 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/placement99/dist/css/style.css",
+        "../node_modules/placement99/dist/lib/animate/animate.css",
+        "../node_modules/placement99/dist/lib/animate/animate.min.css",
+        "../node_modules/placement99/dist/lib/bootstrap/css/bootstrap.css",
+        "../node_modules/placement99/dist/lib/bootstrap/css/bootstrap.min.css",
+        "../node_modules/placement99/dist/lib/font-awesome/css/font-awesome.css",
+        "../node_modules/placement99/dist/lib/font-awesome/css/font-awesome.min.css",
+        "../node_modules/placement99/dist/lib/ionicons/css/ionicons.css",
+        "../node_modules/placement99/dist/lib/ionicons/css/ionicons.min.css",
+        "../node_modules/placement99/dist/lib/magnific-popup/magnific-popup.css",
+        "../node_modules/placement99/dist/lib/owlcarousel/assets/owl.carousel.css",
+        "../node_modules/placement99/dist/lib/owlcarousel/assets/owl.carousel.min.css",
+        "../node_modules/placement99/dist/lib/owlcarousel/assets/owl.theme.default.css",
+        "../node_modules/placement99/dist/lib/owlcarousel/assets/owl.theme.default.min.css",
+        "../node_modules/placement99/dist/lib/owlcarousel/assets/owl.theme.green.css",
+        "../node_modules/placement99/dist/lib/owlcarousel/assets/owl.theme.green.min.css"
+        
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/placement99/dist/lib/sticky/sticky.js",
+        "../node_modules/placement99/dist/lib/owlcarousel/owl.carousel.js",
+        "../node_modules/placement99/dist/lib/owlcarousel/owl.carousel.min.js",
+        "../node_modules/placement99/dist/lib/superfish/superfish.js",
+        "../node_modules/placement99/dist/lib/superfish/superfish.min.js",
+        "../node_modules/placement99/dist/lib/wow/wow.js",
+        "../node_modules/placement99/dist/lib/wow/wow.min.js",
+        "../node_modules/placement99/dist/contactform/contactform.js",
+        "../node_modules/placement99/dist/lib/easing/easing.js",
+        "../node_modules/placement99/dist/lib/easing/easing.min.js",
+        "../node_modules/placement99/dist/lib/magnific-popup/magnific-popup.js",
+        "../node_modules/placement99/dist/lib/magnific-popup/magnific-popup.min.js",
+        "../node_modules/placement99/dist/lib/superfish/hoverIntent.js",
+        "../node_modules/placement99/dist/js/main.js",
+        "../node_modules/placement99/dist/lib/bootstrap/js/bootstrap.bundle.min.js",
+        "../node_modules/placement99/dist/lib/bootstrap/js/bootstrap.min.js",
+        "../node_modules/placement99/dist/lib/jquery/jquery-migrate.min.js",
+        "../node_modules/placement99/dist/lib/jquery/jquery.min.js"
+        
+        
+    
+      ],
+      
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
