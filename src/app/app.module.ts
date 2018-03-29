@@ -10,6 +10,8 @@ import { SocialiconsComponent } from './components/socialicons/socialicons.compo
 import { FooterComponent } from './components/footer/footer.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { ClientssectionComponent } from './components/clientssection/clientssection.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { HomeComponent } from './components/home/home.component';
 
 const appRoutes: Routes =[
   {path:'',component:HeaderComponent},
@@ -24,7 +26,9 @@ const appRoutes: Routes =[
     SocialiconsComponent,
     FooterComponent,
     AboutusComponent,
-    ClientssectionComponent
+    ClientssectionComponent,
+    ContactComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
