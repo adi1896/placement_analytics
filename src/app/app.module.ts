@@ -10,6 +10,9 @@ import { SocialiconsComponent } from './components/socialicons/socialicons.compo
 import { FooterComponent } from './components/footer/footer.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { ClientssectionComponent } from './components/clientssection/clientssection.component';
+import { ServiceService } from './service.service';
+import { CollegeresultsComponent } from './components/collegeresults/collegeresults.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes =[
   {path:'',component:HeaderComponent},
@@ -24,13 +27,15 @@ const appRoutes: Routes =[
     SocialiconsComponent,
     FooterComponent,
     AboutusComponent,
-    ClientssectionComponent
+    ClientssectionComponent,
+    CollegeresultsComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [ServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

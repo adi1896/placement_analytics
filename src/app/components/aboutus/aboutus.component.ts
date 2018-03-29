@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceService } from '../../service.service';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-aboutus',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutusComponent implements OnInit {
 
-  constructor() { }
+  constructor() {   }
 
   ngOnInit() {
+    //this.serviceservice.getposts('http://localhost:8182/html/getdata.php').map(response => response.json() ).subscribe((data) =>
+      //console.log(data))
+      // this.result = datas
   }
 
 }
