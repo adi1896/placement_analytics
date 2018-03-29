@@ -12,6 +12,9 @@ import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { ClientssectionComponent } from './components/clientssection/clientssection.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
+import { ServiceService } from './service.service';
+import { CollegeresultsComponent } from './components/collegeresults/collegeresults.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes =[
   {path:'',component:HeaderComponent},
@@ -29,12 +32,14 @@ const appRoutes: Routes =[
     ClientssectionComponent,
     ContactComponent,
     HomeComponent,
+    CollegeresultsComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [ServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
