@@ -10,6 +10,8 @@ import { SocialiconsComponent } from './components/socialicons/socialicons.compo
 import { FooterComponent } from './components/footer/footer.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { ClientssectionComponent } from './components/clientssection/clientssection.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { HomeComponent } from './components/home/home.component';
 import { ServiceService } from './service.service';
 import { CollegeresultsComponent } from './components/collegeresults/collegeresults.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,6 +30,8 @@ const appRoutes: Routes =[
     FooterComponent,
     AboutusComponent,
     ClientssectionComponent,
+    ContactComponent,
+    HomeComponent,
     CollegeresultsComponent
   ],
   imports: [
