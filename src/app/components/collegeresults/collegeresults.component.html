@@ -4,12 +4,14 @@
   <div *ngFor="let result of results">
     <h4>{{result.State}}</h4>
   </div>
+  <button (click)="postpro()">postbutton</button>
 
-  <table class="table table-bordered" align="center">        
-    <caption>List of users</caption> 
+  
+  <table  class="table table-bordered" align="center">
+      <caption>List of Colleges</caption>
     <thead>
       <tr>
-        <th scope="col">College_Key</th>
+        <th scope="col">Sr.No</th>
         <th scope="col">Country</th>
         <th scope="col">State</th>
         <th scope="col">District</th>
