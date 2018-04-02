@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ServiceService } from './service.service';
 import { CollegeresultsComponent } from './components/collegeresults/collegeresults.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
 
 const appRoutes: Routes =[
   {path:'',component:HeaderComponent},
@@ -32,7 +33,8 @@ const appRoutes: Routes =[
     ClientssectionComponent,
     ContactComponent,
     HomeComponent,
-    CollegeresultsComponent
+    CollegeresultsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
