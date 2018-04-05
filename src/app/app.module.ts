@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ServiceService } from './service.service';
 import { CollegeresultsComponent } from './components/collegeresults/collegeresults.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule,Http,Response,RequestOptions,Headers,URLSearchParams } from '@angular/http';
 import { LoginComponent } from './components/login/login.component';
 
 const appRoutes: Routes =[
@@ -39,6 +40,7 @@ const appRoutes: Routes =[
   imports: [
     BrowserModule,
     HttpClientModule,
+    HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [ServiceService],
