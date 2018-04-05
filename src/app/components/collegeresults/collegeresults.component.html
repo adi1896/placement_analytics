@@ -38,3 +38,10 @@
       </tr>
     </tbody>
   </table>
+  <button (click)="doPost()">POST</button>
+  <button (click)="doGet()">GET</button>
+  <button (click)="doExp()">Exp</button>
+  <button (click)="doTest()">Test</button>
+<div *ngFor="let student of students">
+  <h4>{{student.Country}}</h4>
+</div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../service.service';
 import { HttpClient } from '@angular/common/http';
+import { HttpModule,Http,Response,RequestOptions,Headers,URLSearchParams } from '@angular/http';
+
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -9,35 +11,59 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./collegeresults.component.css']
 })
 export class CollegeresultsComponent implements OnInit {
+  //public students = [];
   // results:result[];
+  students:student[];
+  apiRoot: string = "http://httpbin.org";
+  studentroot: string ="http://192.168.0.2:8182/html/getdata.php";
 
-  constructor(private http:HttpClient) { 
+  constructor(private http:Http) { 
     console.log('connected');
   }
-  
-
-  postpro(){
-  this.http.post('http://192.168.0.2:8182/html/getdata.php',
-   {
-     id :1,
-     state:'telanga'
-   }).subscribe((data:any) => {
-    console.log(data) ;
-    //.map(response => response.json() );
-    //subscribe((data) => console.log(data))
-     }, err => { console.log()});
+   doPost(){
+     let headers = new Headers({'Content-Type': "application/json"});
+     let search = new URLSearchParams();
+     search.set('id','1');
+     search.set('country','India');
+     let obj = {id:'1',country:'India'};
+     this.http.post('http://192.168.0.2:8182/html/getdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(
+        results => {
+        console.log(results);
+     });
+    }
+    doGet(){
+     let search = new URLSearchParams();
+     search.set('id','1');
+     search.set('country','India');
+     this.http.get('http://192.168.0.2:8182/html/getdata.php',{search}).map(res => res.json()).subscribe(students => {this.students=students;});
+    }
+    doExp() {
+      console.log("POST");
+      let url = `${this.apiRoot}/post`;
+      this.http.post(url, {moo:"foo",goo:"loo"}).subscribe(res => console.log(res.json()));
+    }
+    doTest() {
+      let headers = new Headers({'Content-Type': "application/json"});
+      console.log("POST");
+      let url = `${this.studentroot}`;
+      let search = new URLSearchParams();
+    //  search.set('id','1');
+      search.set('country','India');
+      this.http.post(url, {country:"India"}, {search}).subscribe(res => console.log(res.json()));
     }
 
+
   ngOnInit() {
-    let id=1;
-    let state='Madhya Pradesh';
+    // let id=1;
+    // let state='Madhya Pradesh';
+    // this.serviceservice.getstudents().subscribe(data => this.students=data);
   
     
-   this.http.get('http://192.168.0.2:8182/html/getdata.php?id='+id+'&state='+state).subscribe((data:any) => {
-    console.log(data) ;
+  //  this.http.get('http://192.168.0.2:8182/html/getdata.php?id='+id+'&state='+state).subscribe((data:any) => {
+  //   console.log(data) ;
     //.map(response => response.json() );
     //subscribe((data) => console.log(data))
-     });
+   //  });
     //this.serviceservice.getposts().subscribe((posts) => {
      // console.log(posts);
       //this.results = posts;
@@ -50,3 +76,6 @@ export class CollegeresultsComponent implements OnInit {
 //   Country:string;
 //   State:string;
 // }
+interface student{
+  Country:string;
+}

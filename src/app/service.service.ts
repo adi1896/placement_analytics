@@ -11,11 +11,14 @@ export class ServiceService {
     let state='Madhya Pradesh';
   
     
-   this.http.get('http://192.168.0.2:8182/html/getdata.php?id='+id+'&state='+state).subscribe((data:any) => {
-    console.log(data) ;
+  //  this.http.get('http://192.168.0.2:8182/html/getdata.php?id='+id+'&state='+state).subscribe((data:any) => {
+  //   console.log(data) ;
     //.map(response => response.json() );
     //subscribe((data) => console.log(data))
-     });
-
     }
-  }
+    getstudents(){
+      let id=1; 
+      let country='India';
+      return this.http.get('http://192.168.0.2:8182/html/getdata.php?id='+id+'&country='+country);
+    }
+ }
