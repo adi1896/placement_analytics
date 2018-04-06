@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 })
 export class CollegeresultsComponent implements OnInit {
   //public students = [];
-  // results:result[];
+   results:result[];
   students:student[];
   apiRoot: string = "http://httpbin.org";
   studentroot: string ="http://192.168.0.2:8182/html/getdata.php";
@@ -21,16 +21,17 @@ export class CollegeresultsComponent implements OnInit {
     console.log('connected');
   }
    doPost(){
-     let headers = new Headers({'Content-Type': "application/json"});
+     let headers = new Headers({'Content-Type': "application/x-www-form-urlencoded"});
      let search = new URLSearchParams();
      search.set('id','1');
      search.set('country','India');
-     let obj = {id:'1',country:'India'};
-     this.http.post('http://192.168.0.2:8182/html/getdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(
-        results => {
-        console.log(results);
-     });
-    }
+     let obj = {country:'India'};
+     var json =JSON.stringify(obj);
+     var data = 'json='+ json;
+    //  this.http.post('http://192.168.0.2:8182/html/postdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(results => {console.log(results);});
+      this.http.post('http://192.168.0.2:8182/html/postdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(
+        results => {this.results=results;});
+  }
     doGet(){
      let search = new URLSearchParams();
      search.set('id','1');
@@ -45,11 +46,13 @@ export class CollegeresultsComponent implements OnInit {
     doTest() {
       let headers = new Headers({'Content-Type': "application/json"});
       console.log("POST");
-      let url = `${this.studentroot}`;
+      let url = 'http://192.168.0.2:8182/html/post_test.php';
       let search = new URLSearchParams();
     //  search.set('id','1');
       search.set('country','India');
-      this.http.post(url, {country:"India"}, {search}).subscribe(res => console.log(res.json()));
+      let obj = {name:'India'};
+
+      this.http.post(url, JSON.stringify(obj)).subscribe(res => console.log(res.json()));
     }
 
 
@@ -72,10 +75,10 @@ export class CollegeresultsComponent implements OnInit {
   }
 
 }
-// interface result{
-//   Country:string;
-//   State:string;
-// }
+interface result{
+  Country:string;
+  State:string;
+}
 interface student{
   Country:string;
 }
