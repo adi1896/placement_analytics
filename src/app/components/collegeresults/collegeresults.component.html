@@ -1,12 +1,14 @@
-<p>
-  collegeresults works!</p>
+<input #country name="country" placeholder="Country Name"><button (click)="doPost(country.value)">POST Search</button>
+<button (click)="doGet()">GET</button>
+<button (click)="doExp()">Exp</button>
+<button (click)="doTest()">Test</button>
+<div *ngFor="let student of students">
+<h4>{{student.Country}}</h4>
+</div>
+<div *ngFor="let result of results">
+<h4>{{result.Country}}</h4>
+</div>
 
-  <div *ngFor="let result of results">
-    <h4>{{result.State}}</h4>
-  </div>
-  <button (click)="postpro()">postbutton</button>
-
-  
   <table  class="table table-bordered" align="center">
       <caption>List of Colleges</caption>
     <thead>
@@ -18,33 +20,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr *ngFor="let result of results">
         <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <td>{{result.Country}}</td>
+        <td>{{result.State}}</td>
+        <td>{{result.District}}</td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
+      
     </tbody>
   </table>
-  <button (click)="doPost()">POST</button>
-  <button (click)="doGet()">GET</button>
-  <button (click)="doExp()">Exp</button>
-  <button (click)="doTest()">Test</button>
-<div *ngFor="let student of students">
-  <h4>{{student.Country}}</h4>
-</div>
-<div *ngFor="let result of results">
-  <h4>{{result.Country}}</h4>
-</div>
+  

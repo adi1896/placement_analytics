@@ -20,12 +20,12 @@ export class CollegeresultsComponent implements OnInit {
   constructor(private http:Http) { 
     console.log('connected');
   }
-   doPost(){
+   doPost(country){
      let headers = new Headers({'Content-Type': "application/x-www-form-urlencoded"});
      let search = new URLSearchParams();
      search.set('id','1');
      search.set('country','India');
-     let obj = {country:'India'};
+     let obj = {country:country};
      var json =JSON.stringify(obj);
      var data = 'json='+ json;
     //  this.http.post('http://192.168.0.2:8182/html/postdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(results => {console.log(results);});
@@ -78,6 +78,7 @@ export class CollegeresultsComponent implements OnInit {
 interface result{
   Country:string;
   State:string;
+  District:string;
 }
 interface student{
   Country:string;
