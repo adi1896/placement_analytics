@@ -17,6 +17,9 @@ import { CollegeresultsComponent } from './components/collegeresults/collegeresu
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule,Http,Response,RequestOptions,Headers,URLSearchParams } from '@angular/http';
 import { LoginComponent } from './components/login/login.component';
+import {ElasticsearchService} from './elasticsearch.service';
+
+
 
 const appRoutes: Routes =[
   {path:'',component:HeaderComponent},
@@ -43,7 +46,7 @@ const appRoutes: Routes =[
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ServiceService],
+  providers: [ServiceService,ElasticsearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
