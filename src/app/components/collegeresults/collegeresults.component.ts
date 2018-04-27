@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
 export class CollegeresultsComponent implements OnInit {
   //public students = [];
    results:result[];
+   elasticresults:any;
   students:student[];
   apiRoot: string = "http://httpbin.org";
   studentroot: string ="http://192.168.0.2:8182/html/getdata.php";
@@ -55,6 +56,37 @@ export class CollegeresultsComponent implements OnInit {
       this.http.post(url, JSON.stringify(obj)).subscribe(res => console.log(res.json()));
     }
 
+
+
+    elasticPost(state,city){
+      let headers = new Headers({'Content-Type': "application/x-www-form-urlencoded"});
+      let search = new URLSearchParams();
+
+      let obj = {
+        "query": {
+          "bool": {
+            "should": [
+              {
+                "match": {
+                  "State": state
+                }
+              },
+              {
+                "match": {
+                  "City": city
+                }
+              }
+            ]
+          }
+        }
+      };
+      var json =JSON.stringify(obj);
+      var data = 'json='+ json;
+     //  this.http.post('http://192.168.0.2:8182/html/postdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(results => {console.log(results);});
+       this.http.post('http://localhost:9200/jobs/_search?pretty&filter_path=hits.hits._source', JSON.stringify(obj), {headers: headers}).map(res => res.text()).subscribe(
+         elasticresults => {this.elasticresults=elasticresults;});
+         console.log("Hello1",this.elasticresults);
+   }
 
   ngOnInit() {
     // let id=1;

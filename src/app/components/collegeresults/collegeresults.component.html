@@ -1,4 +1,4 @@
-<input #country name="country" placeholder="Country Name"><button (click)="doPost(country.value)">POST Search</button>
+<!--<input #country name="country" placeholder="Country Name"><button (click)="doPost(country.value)">POST Search</button>
 <button (click)="doGet()">GET</button>
 <button (click)="doExp()">Exp</button>
 <button (click)="doTest()">Test</button>
@@ -28,5 +28,29 @@
       </tr>
       
     </tbody>
-  </table>
-  
+  </table>-->
+  <br><br>
+  <input #state name="state" placeholder="state"><br>
+  <input #city name="city" placeholder="city">
+  <button (click)="elasticPost(state.value,city.value)">Elastic Search</button>
+
+  <table  class="table table-bordered" align="center">
+    <caption>List of Colleges</caption>
+  <thead>
+    <tr>
+      <th scope="col">Sr.No</th>
+      <th scope="col">Country</th>
+      <th scope="col">State</th>
+      <th scope="col">District</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let result of results">
+      <th scope="row">1</th>
+      <td>{{result.Country}}</td>
+      <td>{{result.State}}</td>
+      <td>{{result.District}}</td>
+    </tr>
+    
+  </tbody>
+</table>
