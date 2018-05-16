@@ -18,7 +18,8 @@ button {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 90%;
+    width: 20%;
+    margin-right: 20%;
 }
 
 button:hover {

@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule,Http,Response,RequestOptions,Headers,URLSearchParams } from '@angular/http';
 import { LoginComponent } from './components/login/login.component';
 import {ElasticsearchService} from './elasticsearch.service';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 
@@ -38,7 +39,9 @@ const appRoutes: Routes =[
     ContactComponent,
     HomeComponent,
     CollegeresultsComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent,
+  
   ],
   imports: [
     BrowserModule,
