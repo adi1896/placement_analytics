@@ -44,13 +44,15 @@
       <th scope="col">District</th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let result of results">
-      <th scope="row">1</th>
-      <td>{{result.Country}}</td>
-      <td>{{result.State}}</td>
-      <td>{{result.District}}</td>
-    </tr>
-    
-  </tbody>
+
+    <tbody>
+      <tr *ngFor="let result of elasticresults.hits.hits; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{result._source.Country}}</td>
+        <td>{{result._source.State}}</td>
+        <td>{{result._source.District}}</td>
+      </tr>
+      
+    </tbody>
+
 </table>

@@ -83,7 +83,7 @@ export class CollegeresultsComponent implements OnInit {
       var json =JSON.stringify(obj);
       var data = 'json='+ json;
      //  this.http.post('http://192.168.0.2:8182/html/postdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(results => {console.log(results);});
-       this.http.post('http://localhost:9200/jobs/_search?pretty&filter_path=hits.hits._source', JSON.stringify(obj), {headers: headers}).map(res => res.text()).subscribe(
+       this.http.post('http://192.168.0.3:9200/jobs1/_search?pretty&filter_path=hits.hits._source', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(
          elasticresults => {this.elasticresults=elasticresults;});
          console.log("Hello1",this.elasticresults);
    }
