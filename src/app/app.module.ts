@@ -20,6 +20,7 @@ import { HttpModule,Http,Response,RequestOptions,Headers,URLSearchParams } from 
 import { LoginComponent } from './components/login/login.component';
 import {ElasticsearchService} from './elasticsearch.service';
 import { SignupComponent } from './components/signup/signup.component';
+import { AdsComponent } from './components/ads/ads.component';
 
 
 
@@ -42,6 +43,7 @@ const appRoutes: Routes =[
     CollegeresultsComponent,
     LoginComponent,
     SignupComponent,
+    AdsComponent,
   
   ],
   imports: [
