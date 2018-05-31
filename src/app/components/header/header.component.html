@@ -53,47 +53,31 @@
   <!--==========================
     Intro Section
   ============================-->
-  <section id="intro" >
-    <div id="addQuestion" class="createTestContainer">
-      <!--<h2> <span></span><br></h2> -->
+  <section>
   
-        <!-- <input class="form-control" type="text" placeholder="SEARCH" aria-label="Search" style="width:500px" ><br> -->
-         <nav class="navbar navbar-expand-lg navbar-dark blue lighten-2 mb-4"  >
-            <!-- Collapsible content -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent"  >
-        
-                <form class="form-inline mr-auto" >
-                    <input  class="form-control" type="text" placeholder="SEARCH BY COLLEGE" aria-label="Search" style="width:600px" >
-                    <button class="form-control" type="submit" style="width:100px">Search</button>
-                </form>
-            </div>    
-        </nav>
-      </div>
         <!--   <nav><tr><td><input class="form-control" type="text" placeholder="COUNTRY" aria-label="COUNTRY"></td>
             <td><input class="form-control" type="text" placeholder="STATE" aria-label="STATE"></td>
             <td><input class="form-control" type="text" placeholder="CITY" aria-label="CITY"></td>
           <td> <h3><button class="form-control" type="submit">Search</button></h3></td></tr></nav> -->
-  
-       <div class="row align-items-center justify-content-center">
+          <div class="row align-items-center justify-content-center">
       
-         <select>
-          <option value="" style="display:none">COUNTRY</option>
-          <!-- <option *ngFor="let a of try_.a">{{a}}</option> -->
-          </select>
-
-          <select name="state"  [(ngModel)]="model.state" (change)='getcity(model.state)'> 
-          <option value="" style="display:none">STATE</option>
-          <option *ngFor="let b of state" Value="">{{b}}</option>
-         </select>
-
-          <select>
-          <option value="" style="display:none">CITY</option>
-          <option *ngFor="let c of uniqueList.Delhi" value="">{{c}}</option>
-          </select> 
-            <button onclick="" type="submit" style="width:100px;height:22px" >submit</button>
-              </div>
-            
-      
+              <select>
+               <option value="" style="display:none">COUNTRY</option>
+               <!-- <option *ngFor="let a of try_.a">{{a}}</option> -->
+               </select>
+     
+               <select name="state"  [(ngModel)]="model.state" (change)='getcity(model.state)'> 
+               <option value="" style="display:none">STATE</option>
+               <option *ngFor="let b of state" Value="">{{b}}</option>
+              </select>
+     
+               <select>
+               <option value="" style="display:none">CITY</option>
+               <option *ngFor="let c of uniqueList.Delhi" value="">{{c}}</option>
+               </select> 
+                               </div>
+     
+      </section>>
         
       
     <!--<div id="intro-carousel" class="owl-carousel" >
@@ -104,5 +88,5 @@
       <div class="item" style="background-image: url('./assets/img/intro-carousel/5.jpg');"></div>
     </div>-->
 
-  </section><!-- #intro -->
+  <!-- #intro -->
   
