@@ -34,9 +34,9 @@ model : any ={};
     var key:any;
     var val:any;
      
-    console.log(state);
-    console.log(this.uniqueList);
-    //this.city=this.uniqueList.filter();
+    console.log("hello",state);
+    console.log(this.uniqueList[state]);
+    this.city=this.uniqueList[state];
     // for ( key , val in this.uniqueList) {
 
     // }
