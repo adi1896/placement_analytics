@@ -16,8 +16,9 @@ export class CollegeresultsComponent implements OnInit {
   elasticresults: any;
   countresults: any;
   list_jobs1: any;
-  state : any;
-  // uniqueList: any;
+  pageNo: any;
+  PState: any;
+  PCity: any;
   uniqueList = new Set();
   dataCount: any;
 
@@ -32,27 +33,27 @@ export class CollegeresultsComponent implements OnInit {
   apiRoot: string = "http://httpbin.org";
   studentroot: string = "http://192.168.0.2:8182/html/getdata.php";
 
-  getPager(totalItems: number= this.dataCount, currentPage: number = 1, pageSize: number = 10) {
+  getPager(totalItems: number = this.dataCount, currentPage: number = 1, pageSize: number = 10) {
     // calculate total pages
     let totalPages = Math.ceil(totalItems / pageSize);
 
     let startPage: number, endPage: number;
     if (totalPages <= 10) {
-        // less than 10 total pages so show all
-        startPage = 1;
-        endPage = totalPages;
+      // less than 10 total pages so show all
+      startPage = 1;
+      endPage = totalPages;
     } else {
-        // more than 10 total pages so calculate start and end pages
-        if (currentPage <= 6) {
-            startPage = 1;
-            endPage = 10;
-        } else if (currentPage + 4 >= totalPages) {
-            startPage = totalPages - 9;
-            endPage = totalPages;
-        } else {
-            startPage = currentPage - 5;
-            endPage = currentPage + 4;
-        }
+      // more than 10 total pages so calculate start and end pages
+      if (currentPage <= 6) {
+        startPage = 1;
+        endPage = 10;
+      } else if (currentPage + 4 >= totalPages) {
+        startPage = totalPages - 9;
+        endPage = totalPages;
+      } else {
+        startPage = currentPage - 5;
+        endPage = currentPage + 4;
+      }
     }
 
     console.log("Pagenumbers:", startPage, endPage)
@@ -66,17 +67,17 @@ export class CollegeresultsComponent implements OnInit {
 
     // return object with all pager properties required by the view
     return {
-        totalItems: totalItems,
-        currentPage: currentPage,
-        pageSize: pageSize,
-        totalPages: totalPages,
-        startPage: startPage,
-        endPage: endPage,
-        startIndex: startIndex,
-        endIndex: endIndex,
-        pages: pages
+      totalItems: totalItems,
+      currentPage: currentPage,
+      pageSize: pageSize,
+      totalPages: totalPages,
+      startPage: startPage,
+      endPage: endPage,
+      startIndex: startIndex,
+      endIndex: endIndex,
+      pages: pages
     };
-}
+  }
 
   constructor(private http: Http) {
     console.log('connected');
@@ -116,88 +117,168 @@ export class CollegeresultsComponent implements OnInit {
   }
 
   elasticPost(state, city) {
+    this.PState = state;
+    this.PCity = city;
     let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
     let search = new URLSearchParams();
-
-    let count = {
+    console.log("Page Index(elasticPOst):", this.pageNo)
+    let obj ={
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "query_string": {
+                "query": "*",
+                "analyze_wildcard": false
+              }
+            },
+            {
+              "query_string": {
+                "query": "*",
+                "analyze_wildcard": false
+              }
+            },
+            {
+              "range": {
+                "Date": {
+                  "gte": 1370456813443,
+                  "lte": 1528223213444,
+                  "format": "epoch_millis"
+                }
+              }
+            },
+             {
+                      "match": {
+                        "State": "Telangana"
+                      }
+                    },
+                    {
+                      "match": {
+                        "City": "Hyderabad"
+                      }
+                    }
+          ],
+          "must_not": []
+        }
+      },
       "size": 0,
+      "_source": {
+        "excludes": []
+      },
       "aggs": {
-        "groups_by_hits.hits._source":{
+        "2": {
           "terms": {
-            "field": "College_Key"
-          
+            "field": "Full_Name",
+            "size": 5,
+            "order": {
+              "_count": "desc"
+            }
+          },
+          "aggs": {
+            "3": {
+              "terms": {
+                "field": "Batch",
+                "size": 5,
+                "order": {
+                  "_count": "desc"
+                }
+              },
+              "aggs": {
+                "4": {
+                  "terms": {
+                    "field": "Branch",
+                    "size": 5,
+                    "order": {
+                      "_count": "desc"
+                    }
+                  },
+                  "aggs": {
+                    "5": {
+                      "terms": {
+                        "field": "Name_of_the_company .keyword",
+                        "size": 5,
+                        "order": {
+                          "_count": "desc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     };
-
-    let obj = {
-      "size": 10,
-      "from": 0,
-      "aggs": {
-        "groups_by_hits": {
-          "terms": {
-            "field": "College_Key"
-          }
-        }
-      },
-      "query": {
-        "bool": {
-          "should": [
-            {
-              "match": {
-                "State": "Telangana"
-              }
-            },
-            {
-              "match": {
-                "City": "Hyderabad"
-              }
-            }
-          ]
-        }
-      }
-    };    // var countJSON = JSON.stringify(count);
-    // var json = JSON.stringify(obj);
-    // var data = 'json=' + json;
-
-    this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(count), { headers: headers }).map(res => res.json()).subscribe(
-      countresults => { this.countresults = countresults });
-    console.log("COUNTRESULT", this.countresults);
-    //this.elasticresults = this.elasticresults.hits.hits[1]._source.Country
-    
-    //  this.http.post('http://192.168.0.2:8182/html/postdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(results => {console.log(results);});
     this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
-      elasticresults => { this.elasticresults = elasticresults;  this.setPage(1); });
+      elasticresults => { this.elasticresults = elasticresults; this.setPage(1); });
     console.log("ELASTICRESULT", this.elasticresults);
 
-  //   var m;
-  //   console.log("hey")
-  //   for ( var i=0 ; i<this.elasticresults.hits.hits.length ; i++ ){
-  //     // m  = JSON.stringify({country:this.list_jobs1.hits.hits[i]._source.Country,state: this.list_jobs1.hits.hits[i]._source.State, district: this.list_jobs1.hits.hits[i]._source.District ,  citi: this.list_jobs1.hits.hits[i]._source.City } )
-  //      m = JSON.stringify(this.elasticresults.hits.hits[i]._source.College_Key)
-  //      console.log("hey1")
-  //      this.uniqueList.add(m);
-  //      console.log("hey2")
-  //   }
-  // console.log("FINALLY THE UNIQUE LIST", this.uniqueList, "VALUEEE OF M",m);
+  //this.elasticresults = this.elasticresults.aggregations[2].buckets[0][3].buckets[0][4].buckets[0].key;
+  console.log("SOURCE:", this.elasticresults);
+
+    //   var m;
+    //   console.log("hey")
+    //   for ( var i=0 ; i<this.elasticresults.hits.hits.length ; i++ ){
+    //     // m  = JSON.stringify({country:this.list_jobs1.hits.hits[i]._source.Country,state: this.list_jobs1.hits.hits[i]._source.State, district: this.list_jobs1.hits.hits[i]._source.District ,  citi: this.list_jobs1.hits.hits[i]._source.City } )
+    //      m = JSON.stringify(this.elasticresults.hits.hits[i]._source.College_Key)
+    //      console.log("hey1")
+    //      this.uniqueList.add(m);
+    //      console.log("hey2")
+    //   }
+    // console.log("FINALLY THE UNIQUE LIST", this.uniqueList, "VALUEEE OF M",m);
 
   }
 
-setPage(page: number) {
- if (page < 1 || page > this.pager.totalPages) {
-     return;
- }
+  setPage(page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+    this.pageNo = (page - 1) * 10 + 1;
+    console.log("Page On:", page, "Page Index:", this.pageNo);
 
- // get pager object from service
- this.pager = this.getPager(this.elasticresults.length, page);
+  //   let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
+  //   let search = new URLSearchParams();
+  //   console.log("Page Index(elasticPOst):", this.pageNo)
+  //   let obj = {
+  //     "size": 10,
+  //     "from": this.pageNo,
+  //     "aggs": {
+  //       "groups_by_hits": {
+  //         "terms": {
+  //           "field": "College_Key"
+  //         }
+  //       }
+  //     },
+  //     "query": {
+  //       "bool": {
+  //         "should": [
+  //           {
+  //             "match": {
+  //               "State": "Telangana"
+  //             }
+  //           },
+  //           {
+  //             "match": {
+  //               "City": "Hyderabad"
+  //             }
+  //           }
+  //         ]
+  //       }
+  //     }
+  //   };
+  //   this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
+  //     elasticresults => { this.elasticresults = elasticresults; });
+  //  console.log("ES from set page", this.elasticresults)
+  //      // get pager object from service
+    this.pager = this.getPager(this.elasticresults.length, page);
 
- // get current page of items
- this.pagedItems = this.elasticresults.slice(this.pager.startIndex, this.pager.endIndex + 1);
-}
-  
+    // get current page of items
+    this.pagedItems = this.elasticresults.slice(this.pager.startIndex, this.pager.endIndex + 1);
+  }
 
-  
+
+
 
   ngOnInit() {
 
@@ -219,7 +300,7 @@ setPage(page: number) {
         //   }
         // console.log("FINALLY THE UNIQUE LIST", this.uniqueList, "VALUEEE OF M",m);
 
-      //  console.log("STATE OF U_LIST", this.uniqueList[0][0])
+        //  console.log("STATE OF U_LIST", this.uniqueList[0][0])
 
       }
     );

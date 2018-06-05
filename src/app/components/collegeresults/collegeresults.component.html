@@ -38,19 +38,22 @@
   <thead>
     <tr>
       <th scope="col">Sr.No</th>
-      <th scope="col">Colleges</th>
-      <th scope="col">No of people placed</th>
-      <!-- <th scope="col">District</th> -->
+      <th scope="col">Name of the College</th>
+      <th scope="col">Batch No.</th>
+      <th scope="col">Branch.</th>
+      <th scope="col">Company Alloted</th>
+      <th scope="col">No. of grads placed</th>
     </tr>
   </thead>
 
+  <!-- this.elasticresults = this.elasticresults.aggregations[2].buckets[0][3].buckets[0][4].bucket[0][5].bucket[0];
+  -->
     <tbody>
-      <tr *ngFor="let result of elasticresults.aggregations.groups_by_hits.buckets; let i = index">
+      <tr *ngFor="let r1 of elasticresults.aggregations[2].buckets; let i = index">
         <td>{{i + 1}}</td>
-        <td>{{result.key}}</td>
-        <td>{{result.doc_count}}</td>
-        <!-- <td>{{result._source.District}}</td> -->
-      </tr>
+        <td>{{r1.key}}</td>
+        <td><p *ngFor="let r2 of elasticresults.aggregations[2].buckets[i][3].buckets">{{ r2.key }}</p></td>
+        </tr>
     </tbody>
 
 </table>
