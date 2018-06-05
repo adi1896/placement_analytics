@@ -38,20 +38,19 @@
   <thead>
     <tr>
       <th scope="col">Sr.No</th>
-      <th scope="col">Country</th>
-      <th scope="col">State</th>
-      <th scope="col">District</th>
+      <th scope="col">Colleges</th>
+      <th scope="col">No of people placed</th>
+      <!-- <th scope="col">District</th> -->
     </tr>
   </thead>
 
     <tbody>
-      <tr *ngFor="let result of elasticresults.hits.hits; let i = index">
+      <tr *ngFor="let result of elasticresults.aggregations.groups_by_hits.buckets; let i = index">
         <td>{{i + 1}}</td>
-        <td>{{result._source.Country}}</td>
-        <td>{{result._source.State}}</td>
-        <td>{{result._source.District}}</td>
+        <td>{{result.key}}</td>
+        <td>{{result.doc_count}}</td>
+        <!-- <td>{{result._source.District}}</td> -->
       </tr>
-      
     </tbody>
 
 </table>

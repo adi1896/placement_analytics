@@ -14,8 +14,9 @@ import * as _ from 'underscore';
 export class CollegeresultsComponent implements OnInit {
   results: result[];
   elasticresults: any;
+  countresults: any;
   list_jobs1: any;
-  state = new Set();
+  state : any;
   // uniqueList: any;
   uniqueList = new Set();
   dataCount: any;
@@ -118,43 +119,69 @@ export class CollegeresultsComponent implements OnInit {
     let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
     let search = new URLSearchParams();
 
+    let count = {
+      "size": 0,
+      "aggs": {
+        "groups_by_hits.hits._source":{
+          "terms": {
+            "field": "College_Key"
+          
+          }
+        }
+      }
+    };
+
     let obj = {
+      "size": 10,
+      "from": 0,
+      "aggs": {
+        "groups_by_hits": {
+          "terms": {
+            "field": "College_Key"
+          }
+        }
+      },
       "query": {
         "bool": {
           "should": [
             {
               "match": {
-                "State": state
+                "State": "Telangana"
               }
             },
             {
               "match": {
-                "City": city
+                "City": "Hyderabad"
               }
             }
           ]
         }
       }
-    };
-    var json = JSON.stringify(obj);
-    var data = 'json=' + json;
+    };    // var countJSON = JSON.stringify(count);
+    // var json = JSON.stringify(obj);
+    // var data = 'json=' + json;
+
+    this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(count), { headers: headers }).map(res => res.json()).subscribe(
+      countresults => { this.countresults = countresults });
+    console.log("COUNTRESULT", this.countresults);
+    //this.elasticresults = this.elasticresults.hits.hits[1]._source.Country
+    
     //  this.http.post('http://192.168.0.2:8182/html/postdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(results => {console.log(results);});
-    this.http.post('http://192.168.0.3:9200/jobs1/_search?pretty&filter_path=hits.hits._source', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
+    this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
       elasticresults => { this.elasticresults = elasticresults;  this.setPage(1); });
-    console.log("Hello1", this.elasticresults);
-    this.elasticresults = this.elasticresults.hits.hits[1]._source.Country
-    console.log("source list", this.elasticresults);
+    console.log("ELASTICRESULT", this.elasticresults);
 
-//      // get dummy data
-//      this.http.get('./dummy-data.json')
-//      .map((response: Response) => response.json())
-//      .subscribe(data => {
-//          // set items to json response
-//          this.allItems = data;
+  //   var m;
+  //   console.log("hey")
+  //   for ( var i=0 ; i<this.elasticresults.hits.hits.length ; i++ ){
+  //     // m  = JSON.stringify({country:this.list_jobs1.hits.hits[i]._source.Country,state: this.list_jobs1.hits.hits[i]._source.State, district: this.list_jobs1.hits.hits[i]._source.District ,  citi: this.list_jobs1.hits.hits[i]._source.City } )
+  //      m = JSON.stringify(this.elasticresults.hits.hits[i]._source.College_Key)
+  //      console.log("hey1")
+  //      this.uniqueList.add(m);
+  //      console.log("hey2")
+  //   }
+  // console.log("FINALLY THE UNIQUE LIST", this.uniqueList, "VALUEEE OF M",m);
 
-//          // initialize to page 1
-//          this.setPage(1);
-//      });
   }
 
 setPage(page: number) {
@@ -186,12 +213,13 @@ setPage(page: number) {
 
         //   var m;
         //   for ( var i=0 ; i<this.list_jobs1.hits.hits.length ; i++ ){
-        //      m  = JSON.stringify({country:this.list_jobs1.hits.hits[i]._source.Country,state: this.list_jobs1.hits.hits[i]._source.State, district: this.list_jobs1.hits.hits[i]._source.District ,  citi: this.list_jobs1.hits.hits[i]._source.City } )
-        //     // m = JSON.stringify({country:this.list_jobs1.hits.hits[i]._source.Country})
-
+        //     // m  = JSON.stringify({country:this.list_jobs1.hits.hits[i]._source.Country,state: this.list_jobs1.hits.hits[i]._source.State, district: this.list_jobs1.hits.hits[i]._source.District ,  citi: this.list_jobs1.hits.hits[i]._source.City } )
+        //      m = JSON.stringify(this.list_jobs1.hits.hits[i]._source.State)
         //      this.uniqueList.add(m);
         //   }
-        // console.log("FINALLY THE UNIQUE LIST", this.uniqueList, m);
+        // console.log("FINALLY THE UNIQUE LIST", this.uniqueList, "VALUEEE OF M",m);
+
+      //  console.log("STATE OF U_LIST", this.uniqueList[0][0])
 
       }
     );
