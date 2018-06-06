@@ -1,3 +1,165 @@
-<p>
-  home works!
-</p>
+<section>
+  <div class="col-md-12">
+    <div class="form">
+      <form method="post" role="form" class="contactForm">
+        <div class="form-row">
+
+          <div class="form-group col-md-3">
+
+            <select class="form-control" name="country" #country style="height: 50px;font-size: 18px;">
+              <option value="" style="display:none">COUNTRY</option>
+              <option value="India" selected>India</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+
+            <select class="form-control" name="state" [(ngModel)]="model.state" (change)='getcity(model.state)' style="height: 50px;font-size: 18px;">
+              <option value="" style="display:none">STATE</option>
+              <option *ngFor="let b of state" [ngValue]="b">{{b}}</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-3">
+
+            <select class="form-control" name="city" [(ngModel)]="model.city" style="height: 50px;font-size: 18px;">
+              <option value="" style="display:none">CITY</option>
+              <option *ngFor="let c of city" [ngValue]="c">{{c}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3 text-center">
+
+            <button class="button" (click)="searchresult(country.value,model.state,model.city)" type="submit">Submit</button>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="col-md-12">
+    <div class="col-md-2 borderr" style="border:2px solid #dddddd;">
+      <div>
+        <div align="center" class="label_under" style="border:2px solid #dddddd;background-color:#50d8af;color:white;">
+
+          <h4>Advanced search</h4>
+        </div>
+
+
+        <div class="advance" style="border:2px solid #dddddd;">
+          <h3 style="background-color:gray;color:white;">DEPARTMENT</h3>
+          <div class="box-content" style="height:150px;overflow: scroll;">
+            <div class="">
+              <label>
+                <input type="checkbox" class="span12" id="brand_{{i+1}}" (change)="changeModel($event,modelArr,b)" style="height:20px;width:15px;"
+                  [checked]="modelArr.includes(b)" name="" value={{b}}>{{b}}</label>
+
+              <br>
+            </div>
+
+
+          </div>
+        </div>
+
+        <div class="advance" style="border:2px solid #dddddd;">
+          <div class="box">
+            <h3 style="background-color:grey;color:white;">COMPANY</h3>
+            <div class="box-content" style="height:150px;overflow: scroll;">
+              <div class="">
+                <label>
+                  <input type="checkbox">GOOGLE
+                  <br>
+                  <input type="checkbox">MICROSOFT
+                  <br>
+                  <input type="checkbox">YAHOO
+                </label>
+                <br>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="advance" style="border:2px solid #dddddd;">
+          <div class="box">
+            <h3 style="background-color:gray;color:white;">YEAR</h3>
+            <div class="box-content" style="height:150px;overflow: scroll;">
+              <div class="">
+                <label>
+                  <input type="checkbox">2018
+                  <br>
+                  <input type="checkbox">2017
+                  <br>
+                  <input type="checkbox">2016
+                  <br>
+                </label>
+                <br>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7">
+
+      <section>
+
+
+        <table class="table table-bordered" align="center">
+          <caption>List of Colleges</caption>
+          <thead>
+            <tr>
+              <th scope="col">Sr.No</th>
+              <th scope="col">Country</th>
+              <th scope="col">State</th>
+              <th scope="col">District</th>
+              <th scope="col">College Name</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let result of elasticresults; let i = index">
+              <td>{{i + 1}}</td>
+              <td>{{result._source.Country}}</td>
+              <td>{{result._source.State}}</td>
+              <td>{{result._source.District}}</td>
+              <td>{{result._source.Full_Name}}</td>
+            </tr>
+            <!-- <tr *ngFor="let result of m; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{result.state}}</td>
+                <td>{{result.city}}</td>
+                <td>{{result.district}}</td>
+                <td>{{result.college_name}}</td>
+
+              </tr>
+             -->
+          </tbody>
+
+        </table>
+        
+        
+        <br>
+        <div class="col-lg-12 content">
+          <h2>Placement99</h2>
+          <h3>WOIR was formed by three friends in 2015 keeping in vision the innovative line of products. We have opened our
+            center in Telecom Nagar @ Hyderabad. WOIR Software India Pvt. Ltd. , a startup aiming for innovative line of
+            products has focus on Big Data Analytics. We also take work related to the domain and execute them with assured
+            quality and in time. Also, we offer job oriented course designed by industry experts – and we are sure that those
+            course will help in availing new opportunities to both experienced and freshers.</h3>
+
+          <!--<ul>
+                <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                <li><i class="ion-android-checkmark-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+              </ul>-->
+
+        </div>
+      </section>
+    </div>
+    <div class="col-md-3"></div>
+
+  </div>
+</section>
