@@ -46,17 +46,17 @@
     </tr>
   </thead>
 
-  <!-- this.elasticresults = this.elasticresults.aggregations[2].buckets[0][3].buckets[0][4].bucket[0][5].bucket[0];
-  -->
     <tbody>
-      <tr *ngFor="let r1 of elasticresults.aggregations[2].buckets; let i = index">
-        <td>{{i + 1}}</td>
-        <td>{{r1.key}}</td>
-        <td><p *ngFor="let r2 of elasticresults.aggregations[2].buckets[i][3].buckets">{{ r2.key }}</p></td>
-        </tr>
+      <tr *ngFor="let r of DispResList; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{r.college}}</td>  
+          <td>{{r.batch}}</td>  
+          <td>{{r.count}}</td> 
+      </tr>
     </tbody>
 
 </table>
+<!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
 <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
     <li [ngClass]="{disabled:pager.currentPage === 1}">
         <a (click)="setPage(1)">First</a>

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Pipe, PipeTransform } from '@angular/core';
 import { ServiceService } from '../../service.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpModule, Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
+import { stringify } from 'querystring';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 
 @Component({
   selector: 'app-collegeresults',
@@ -17,8 +20,9 @@ export class CollegeresultsComponent implements OnInit {
   countresults: any;
   list_jobs1: any;
   pageNo: any;
-  PState: any;
-  PCity: any;
+  json: any;
+  DispRes: any;
+  DispResList = new Set();
   uniqueList = new Set();
   dataCount: any;
 
@@ -117,8 +121,6 @@ export class CollegeresultsComponent implements OnInit {
   }
 
   elasticPost(state, city) {
-    this.PState = state;
-    this.PCity = city;
     let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
     let search = new URLSearchParams();
     console.log("Page Index(elasticPOst):", this.pageNo)
@@ -210,13 +212,55 @@ export class CollegeresultsComponent implements OnInit {
         }
       }
     };
+    // console.log("OBJ STRING:", obj);
+    // this.json = JSON.stringify(obj);
+    // console.log("OBJ JSON :", this.json);
     this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
       elasticresults => { this.elasticresults = elasticresults; this.setPage(1); });
     console.log("ELASTICRESULT", this.elasticresults);
+      var i;
+      var j;
+      var k;
+      var l;
+     this.DispRes = {
+      "college" : {
+     
+    },
+    "branch" : {
+     
+    },
+    "batch" :
+    {
+     
+    },
+    "company" : {
+     
+    },
+    "count" : {
+    }
+  }
+   
+    for(i=0; i< this.elasticresults.aggregations[2].buckets.length; i++)
+    {
+      for(j=0; j< this.elasticresults.aggregations[2].buckets[i][3].buckets.length; j++)
+      {
+        // for(k=0; k< this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets.length; k++)
+        // {
+        //   for(l=0; l< this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets.length; l++)
+        //   {
+            
+            this.DispResList.add ({"college" : this.elasticresults.aggregations[2].buckets[i].key, "batch": this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key, 
+            // "branch": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k].key, "company": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets[l].key,
+            "count": this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count} );
+            // console.log("DOONE", this.DispResList);
+      //     }
+      //   }
+         }
+    }
+    
 
-  //this.elasticresults = this.elasticresults.aggregations[2].buckets[0][3].buckets[0][4].buckets[0].key;
-  console.log("SOURCE:", this.elasticresults);
-
+    console.log("DISPRESLIST:", this.DispResList);
+  
     //   var m;
     //   console.log("hey")
     //   for ( var i=0 ; i<this.elasticresults.hits.hits.length ; i++ ){
