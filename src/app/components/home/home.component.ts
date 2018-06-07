@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { uniqueList } from './uniqueList';
+import { ServiceService } from '../../service.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpModule, Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
+import * as _ from 'underscore';
+import { stringify } from 'querystring';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @Component({
@@ -19,23 +23,217 @@ export class HomeComponent implements OnInit {
   elasticresults: any;
   uniqueresultList = new Set();
   year = new Set();
+  results: result[];
+  countresults: any;
+  list_jobs1: any;
+  pageNo: any;
+  DispResList = new Set();
+  dataCount: any;
 
+  // array of all items to be paged
+  private allItems: any[];
+  // pager object
+  pager: any = {};
+  // paged items
+  pagedItems: any[];
+
+  getPager(totalItems: number = this.dataCount, currentPage: number = 1, pageSize: number = 10) {
+    // calculate total pages
+    let totalPages = Math.ceil(totalItems / pageSize);
+
+    let startPage: number, endPage: number;
+    if (totalPages <= 10) {
+      // less than 10 total pages so show all
+      startPage = 1;
+      endPage = totalPages;
+    } else {
+      // more than 10 total pages so calculate start and end pages
+      if (currentPage <= 6) {
+        startPage = 1;
+        endPage = 10;
+      } else if (currentPage + 4 >= totalPages) {
+        startPage = totalPages - 9;
+        endPage = totalPages;
+      } else {
+        startPage = currentPage - 5;
+        endPage = currentPage + 4;
+      }
+    }
+
+    console.log("Pagenumbers:", startPage, endPage)
+
+    // calculate start and end item indexes
+    let startIndex = (currentPage - 1) * pageSize;
+    let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
+
+    // // create an array of pages to ng-repeat in the pager control
+    let pages = _.range(startPage, endPage + 1);
+
+    // return object with all pager properties required by the view
+    return {
+      totalItems: totalItems,
+      currentPage: currentPage,
+      pageSize: pageSize,
+      totalPages: totalPages,
+      startPage: startPage,
+      endPage: endPage,
+      startIndex: startIndex,
+      endIndex: endIndex,
+      pages: pages
+    };
+  }
 
   constructor(private http: Http) { }
+
+  elasticPost(country, state, city) {
+    let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
+    let search = new URLSearchParams();
+    console.log("Page Index(elasticPOst):", this.pageNo)
+    let obj ={
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "query_string": {
+                "query": "*",
+                "analyze_wildcard": false
+              }
+            },
+            {
+              "query_string": {
+                "query": "*",
+                "analyze_wildcard": false
+              }
+            },
+            {
+              "range": {
+                "Date": {
+                  "gte": 1370456813443,
+                  "lte": 1528223213444,
+                  "format": "epoch_millis"
+                }
+              }
+            },
+             {
+                      "match": {
+                        "State": "Telangana"
+                      }
+                    },
+                    {
+                      "match": {
+                        "City": "Hyderabad"
+                      }
+                    }
+          ],
+          "must_not": []
+        }
+      },
+      "size": 0,
+      "_source": {
+        "excludes": []
+      },
+      "aggs": {
+        "2": {
+          "terms": {
+            "field": "Full_Name",
+            "size": 5,
+            "order": {
+              "_count": "desc"
+            }
+          },
+          "aggs": {
+            "3": {
+              "terms": {
+                "field": "Batch",
+                "size": 5,
+                "order": {
+                  "_count": "desc"
+                }
+              },
+              "aggs": {
+                "4": {
+                  "terms": {
+                    "field": "Branch",
+                    "size": 5,
+                    "order": {
+                      "_count": "desc"
+                    }
+                  },
+                  "aggs": {
+                    "5": {
+                      "terms": {
+                        "field": "Name_of_the_company .keyword",
+                        "size": 5,
+                        "order": {
+                          "_count": "desc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+
+    this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
+      elasticresults => { this.elasticresults = elasticresults; this.setPage(1); });
+    console.log("ELASTICRESULT", this.elasticresults);
+      var i, k, l, j;
+     
+    for(i=0; i< this.elasticresults.aggregations[2].buckets.length; i++)
+    {
+      for(j=0; j< this.elasticresults.aggregations[2].buckets[i][3].buckets.length; j++)
+      {
+        // for(k=0; k< this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets.length; k++)
+        // {
+        //   for(l=0; l< this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets.length; l++)
+        //   {
+            
+            this.DispResList.add ({"college" : this.elasticresults.aggregations[2].buckets[i].key, "batch": this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key, 
+            // "branch": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k].key, "company": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets[l].key,
+            "count": this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count} );
+            // console.log("DOONE", this.DispResList);
+      //     }
+      //   }
+         }
+    }
+    console.log("DISPRESLIST:", this.DispResList);
+  }
+
+  setPage(page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+    this.pageNo = (page - 1) * 10 + 1;
+    console.log("Page On:", page, "Page Index:", this.pageNo);
+
+    this.pager = this.getPager(this.elasticresults.length, page);
+
+    // get current page of items
+    this.pagedItems = this.elasticresults.slice(this.pager.startIndex, this.pager.endIndex + 1);
+  }
 
 
 
   ngOnInit() {
 
-
+    var a: any;
+    this.http.get('http://192.168.0.3:9200/jobs1/_search?pretty&filter_path=hits').map(res => res.json()).subscribe(
+      list_jobs1 => {
+        this.list_jobs1 = list_jobs1;
+        console.log("I CAN SEE DATA HERE: ", this.list_jobs1);
+        this.dataCount = this.list_jobs1.hits.total;
+        console.log("THE TOOOOTAL COUNT OF DAAAAAAATA IS:", this.dataCount);
+      }
+    );
     this.uniqueList = new uniqueList().getJsonCategeries();
     this.state = Object.keys(this.uniqueList);
     console.log(this.uniqueList);
     console.log("hvuvhh", this.state);
     console.log(this.uniqueList.Delhi);
-
-
-
   }
   getcity(state) {
     var key: any;
@@ -83,18 +281,7 @@ export class HomeComponent implements OnInit {
     console.log("Hello1", this.elasticresults);
     console.log(this.elasticresults.hits.hits)
     this.elasticresults = this.elasticresults.hits.hits;
-
-    // this.elasticresults = this.elasticresults.hits.hits[1]._source.Country
-    // var m;
-    // for (var i = 0; i < this.elasticresults.length; i++) {
-    //   m = JSON.stringify({ state: this.elasticresults[i]._source.State, district: this.elasticresults[i]._source.District, citi: this.elasticresults[i]._source.City,college_name: this.elasticresults[i]._source.Full_Name  })
-    //   // m = JSON.stringify({country:this.list_jobs1.hits.hits[i]._source.Country})
-
-    //   this.uniqueresultList.add(m);
-    // }
-    // console.log("FINALLY THE UNIQUE LIST", this.uniqueresultList, m);
     var x: any;
-
     for (x in this.elasticresults.hits.hits) {
       //this.autoMake = posts.autosFound.autoMake.filter((x, i, a) => x && a.indexOf(x) === i);
       console.log("new");
@@ -102,29 +289,16 @@ export class HomeComponent implements OnInit {
         this.year.add(this.elasticresults[x]._source.Batch);
         console.log("yaeadardaerrse", this.year)
       }
-
-
-      // if (calls.resultParts[x].color) {
-
-      //   this.colors.add(calls.resultParts[x].color);
-      //   console.log("colcococlcocloclco", this.colors);
-
-      // }
-      // if (calls.resultParts[x].manufacturers) {
-
-      //   this.manufacturers.add(calls.resultParts[x].manufacturers);
-      //   console.log("manufactututututututu", this.manufacturers);
-
-      // }
-      // if (calls.resultParts[x].fit) {
-
-      //   this.fits.add(calls.resultParts[x].fit);
-      // }
-
     }
-    
-
   }
-  
-
 }
+
+interface result {
+  Country: string;
+  State: string;
+  District: string;
+}
+interface student {
+  Country: string;
+}
+
