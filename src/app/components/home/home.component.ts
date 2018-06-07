@@ -86,6 +86,7 @@ export class HomeComponent implements OnInit {
   constructor(private http: Http) { }
 
   elasticPost(country, state, city) {
+    this.DispResList.clear();
     let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
     let search = new URLSearchParams();
     console.log("Page Index(elasticPOst):", this.pageNo)
@@ -246,52 +247,52 @@ export class HomeComponent implements OnInit {
 
     // }
   }
-  searchresult(country, state, city) {
-    console.log("hellooooooldksncoldsino", country, state, city)
-    let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
-    let search = new URLSearchParams();
+//   searchresult(country, state, city) {
+//     console.log("hellooooooldksncoldsino", country, state, city)
+//     let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
+//     let search = new URLSearchParams();
 
-    let obj = {
-      "size": 20,
-      "from": 0,
-      "query": {
-        "bool": {
-          "should": [
-            {
-              "match": {
-                "State": state
-              }
-            },
-            {
-              "match": {
-                "City": city
-              }
-            }
-          ]
-        }
-      }
-    };
-    var json = JSON.stringify(obj);
-    var data = 'json=' + json;
-    //  this.http.post('http://192.168.0.2:8182/html/postdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(results => {console.log(results);});
-    this.http.post('http://192.168.0.3:9200/jobs1/_search?pretty&filter_path=hits.hits._source', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
-      elasticresults => {
-        this.elasticresults = elasticresults;
-      });
-    console.log("Hello1", this.elasticresults);
-    console.log(this.elasticresults.hits.hits)
-    this.elasticresults = this.elasticresults.hits.hits;
-    var x: any;
-    for (x in this.elasticresults.hits.hits) {
-      //this.autoMake = posts.autosFound.autoMake.filter((x, i, a) => x && a.indexOf(x) === i);
-      console.log("new");
-      if (this.elasticresults.hits.hits[x]._source.Batch) {
-        this.year.add(this.elasticresults[x]._source.Batch);
-        console.log("yaeadardaerrse", this.year)
-      }
-    }
-  }
-}
+//     let obj = {
+//       "size": 20,
+//       "from": 0,
+//       "query": {
+//         "bool": {
+//           "should": [
+//             {
+//               "match": {
+//                 "State": state
+//               }
+//             },
+//             {
+//               "match": {
+//                 "City": city
+//               }
+//             }
+//           ]
+//         }
+//       }
+//     };
+//     var json = JSON.stringify(obj);
+//     var data = 'json=' + json;
+//     //  this.http.post('http://192.168.0.2:8182/html/postdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(results => {console.log(results);});
+//     this.http.post('http://192.168.0.3:9200/jobs1/_search?pretty&filter_path=hits.hits._source', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
+//       elasticresults => {
+//         this.elasticresults = elasticresults;
+//       });
+//     console.log("Hello1", this.elasticresults);
+//     console.log(this.elasticresults.hits.hits)
+//     this.elasticresults = this.elasticresults.hits.hits;
+//     var x: any;
+//     for (x in this.elasticresults.hits.hits) {
+//       //this.autoMake = posts.autosFound.autoMake.filter((x, i, a) => x && a.indexOf(x) === i);
+//       console.log("new");
+//       if (this.elasticresults.hits.hits[x]._source.Batch) {
+//         this.year.add(this.elasticresults[x]._source.Batch);
+//         console.log("yaeadardaerrse", this.year)
+//       }
+//     }
+//   }
+ }
 
 interface result {
   Country: string;
