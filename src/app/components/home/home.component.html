@@ -15,7 +15,7 @@
 
             <select class="form-control" name="state" [(ngModel)]="model.state" (change)='getcity(model.state)' style="height: 50px;font-size: 18px;">
               <option value="" style="display:none">STATE</option>
-              <option *ngFor="let b of state" [ngValue]="b">{{b}}</option>
+              <option *ngFor="let b of this.uniqueList.aggregations[2].buckets" [ngValue]="b.key">{{b.key}}</option>
             </select>
           </div>
 

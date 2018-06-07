@@ -17,18 +17,21 @@ import {NgxPaginationModule} from 'ngx-pagination';
 export class HomeComponent implements OnInit {
 
   uniqueList: any;
+  uniqueList1: any;
   state: any;
-  city: any;
   model: any = {};
   elasticresults: any;
   uniqueresultList = new Set();
+  city = new Set();
   year = new Set();
   results: result[];
   countresults: any;
   list_jobs1: any;
   pageNo: any;
   DispResList = new Set();
+  uniqueListRESULT = new Set();
   dataCount: any;
+  modelArr = new Array();
 
   // array of all items to be paged
   private allItems: any[];
@@ -117,12 +120,12 @@ export class HomeComponent implements OnInit {
             },
              {
                       "match": {
-                        "State": "Telangana"
+                        "State": state
                       }
                     },
                     {
                       "match": {
-                        "City": "Hyderabad"
+                        "City": city
                       }
                     }
           ],
@@ -178,7 +181,6 @@ export class HomeComponent implements OnInit {
         }
       }
     };
-
     this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
       elasticresults => { this.elasticresults = elasticresults; this.setPage(1); });
     console.log("ELASTICRESULT", this.elasticresults);
@@ -203,6 +205,75 @@ export class HomeComponent implements OnInit {
     }
     console.log("DISPRESLIST:", this.DispResList);
   }
+
+  PostForUList()
+  {
+      this.DispResList.clear();
+      let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
+      let search = new URLSearchParams();
+      console.log("Page Index(elasticPOst):", this.pageNo)
+      let obj ={
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "query_string": {
+                  "analyze_wildcard": false,
+                  "query": "*"
+                }
+              },
+              {
+                "query_string": {
+                  "analyze_wildcard": false,
+                  "query": "*"
+                }
+              },
+              {
+                "range": {
+                  "Date": {
+                    "gte": 1370617256535,
+                    "lte": 1528383656535,
+                    "format": "epoch_millis"
+                  }
+                }
+              }
+            ],
+            "must_not": []
+          }
+        },
+        "size": 0,
+        "_source": {
+          "excludes": []
+        },
+        "aggs": {
+          "2": {
+            "terms": {
+              "field": "State",
+              "size": 40,
+              "order": {
+                "_count": "desc"
+              }
+            },
+            "aggs": {
+              "3": {
+                "terms": {
+                  "field": "City",
+                  "size": 100,
+                  "order": {
+                    "_count": "desc"
+                  }
+                }
+              }
+            }
+          }
+        }
+      };
+  
+      this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
+        uniqueList1 => { this.uniqueList1 = uniqueList1;});
+      console.log("UNIQUELIST:", this.uniqueList1);
+  }
+  
 
   setPage(page: number) {
     if (page < 1 || page > this.pager.totalPages) {
@@ -230,19 +301,35 @@ export class HomeComponent implements OnInit {
         console.log("THE TOOOOTAL COUNT OF DAAAAAAATA IS:", this.dataCount);
       }
     );
+
     this.uniqueList = new uniqueList().getJsonCategeries();
     this.state = Object.keys(this.uniqueList);
-    console.log(this.uniqueList);
+    console.log("UNIQUE LIST READY: ", this.uniqueList);
+
+    console.log("STAAAAAAAAAAAATE:", this.uniqueList.aggregations[2].buckets[1].key)
     console.log("hvuvhh", this.state);
     console.log(this.uniqueList.Delhi);
   }
   getcity(state) {
     var key: any;
     var val: any;
+    var i, j;
+    this.city.clear();
+    for(i=0; i<this.uniqueList.aggregations[2].buckets.length; i++)
+    { 
+      if(this.uniqueList.aggregations[2].buckets[i].key == state)
+      {
+        for(j=0; this.uniqueList.aggregations[2].buckets[i][3].buckets.length; j++)
+        {
+          if(this.uniqueList.aggregations[2].buckets[i][3].buckets[j].key != "")
+          {
+            this.city.add(this.uniqueList.aggregations[2].buckets[i][3].buckets[j].key);
+             console.log("CIIIITY:", this.city);
+          }
+        }
+      }
+    }
 
-    console.log("hello", state);
-    console.log(this.uniqueList[state]);
-    this.city = this.uniqueList[state];
     // for ( key , val in this.uniqueList) {
 
     // }

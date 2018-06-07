@@ -1,1293 +1,734 @@
 
-export class uniqueList{   
-    getJsonCategeries(){
+export class uniqueList {
+    getJsonCategeries() {
         return {
-   "Andaman and Nicobar Islands": [
-      "Port Blair"
-   ],
-   "Andhra Pradesh": [
-      "Adoni",
-      "Amalapuram",
-      "Anakapalle",
-      "Anantapur",
-      "Bapatla",
-      "Bheemunipatnam",
-      "Bhimavaram",
-      "Bobbili",
-      "Chilakaluripet",
-      "Chirala",
-      "Chittoor",
-      "Dharmavaram",
-      "Eluru",
-      "Gooty",
-      "Gudivada",
-      "Gudur",
-      "Guntakal",
-      "Guntur",
-      "Hindupur",
-      "Jaggaiahpet",
-      "Jammalamadugu",
-      "Kadapa",
-      "Kadiri",
-      "Kakinada",
-      "Kandukur",
-      "Kavali",
-      "Kovvur",
-      "Kurnool",
-      "Macherla",
-      "Machilipatnam",
-      "Madanapalle",
-      "Mandapeta",
-      "Markapur",
-      "Nagari",
-      "Naidupet",
-      "Nandyal",
-      "Narasapuram",
-      "Narasaraopet",
-      "Narsipatnam",
-      "Nellore",
-      "Nidadavole",
-      "Nuzvid",
-      "Ongole",
-      "Palacole",
-      "Palasa Kasibugga",
-      "Parvathipuram",
-      "Pedana",
-      "Peddapuram",
-      "Pithapuram",
-      "Ponnur",
-      "Proddatur",
-      "Punganur",
-      "Puttur",
-      "Rajahmundry",
-      "Rajam",
-      "Rajampet",
-      "Ramachandrapuram",
-      "Rayachoti",
-      "Rayadurg",
-      "Renigunta",
-      "Repalle",
-      "Salur",
-      "Samalkot",
-      "Sattenapalle",
-      "Srikakulam",
-      "Srikalahasti",
-      "Srisailam Project (Right Flank Colony) Township",
-      "Sullurpeta",
-      "Tadepalligudem",
-      "Tadpatri",
-      "Tanuku",
-      "Tenali",
-      "Tirupati",
-      "Tiruvuru",
-      "Tuni",
-      "Uravakonda",
-      "Venkatagiri",
-      "Vijayawada",
-      "Vinukonda",
-      "Visakhapatnam",
-      "Vizianagaram",
-      "Yemmiganur",
-      "Yerraguntla"
-   ],
-   "Arunachal Pradesh": [
-      "Naharlagun",
-      "Pasighat"
-   ],
-   "Assam": [
-      "Barpeta",
-      "Bongaigaon City",
-      "Dhubri",
-      "Dibrugarh",
-      "Diphu",
-      "Goalpara",
-      "Guwahati",
-      "Jorhat",
-      "Karimganj",
-      "Lanka",
-      "Lumding",
-      "Mangaldoi",
-      "Mankachar",
-      "Margherita",
-      "Mariani",
-      "Marigaon",
-      "Nagaon",
-      "Nalbari",
-      "North Lakhimpur",
-      "Rangia",
-      "Sibsagar",
-      "Silapathar",
-      "Silchar",
-      "Tezpur",
-      "Tinsukia"
-   ],
-   "Bihar": [
-      "Araria",
-      "Arrah",
-      "Arwal",
-      "Asarganj",
-      "Aurangabad",
-      "Bagaha",
-      "Barh",
-      "Begusarai",
-      "Bettiah",
-      "Bhabua",
-      "Bhagalpur",
-      "Buxar",
-      "Chhapra",
-      "Darbhanga",
-      "Dehri-on-Sone",
-      "Dumraon",
-      "Forbesganj",
-      "Gaya",
-      "Gopalganj",
-      "Hajipur",
-      "Jamalpur",
-      "Jamui",
-      "Jehanabad",
-      "Katihar",
-      "Kishanganj",
-      "Lakhisarai",
-      "Lalganj",
-      "Madhepura",
-      "Madhubani",
-      "Maharajganj",
-      "Mahnar Bazar",
-      "Makhdumpur",
-      "Maner",
-      "Manihari",
-      "Marhaura",
-      "Masaurhi",
-      "Mirganj",
-      "Mokameh",
-      "Motihari",
-      "Motipur",
-      "Munger",
-      "Murliganj",
-      "Muzaffarpur",
-      "Narkatiaganj",
-      "Naugachhia",
-      "Nawada",
-      "Nokha",
-      "Patna",
-      "Piro",
-      "Purnia",
-      "Rafiganj",
-      "Rajgir",
-      "Ramnagar",
-      "Raxaul Bazar",
-      "Revelganj",
-      "Rosera",
-      "Saharsa",
-      "Samastipur",
-      "Sasaram",
-      "Sheikhpura",
-      "Sheohar",
-      "Sherghati",
-      "Silao",
-      "Sitamarhi",
-      "Siwan",
-      "Sonepur",
-      "Sugauli",
-      "Sultanganj",
-      "Supaul",
-      "Warisaliganj"
-   ],
-   "Chandigarh": [
-      "Chandigarh"
-   ],
-   "Chhattisgarh": [
-      "Ambikapur",
-      "Bhatapara",
-      "Bhilai Nagar",
-      "Bilaspur",
-      "Chirmiri",
-      "Dalli-Rajhara",
-      "Dhamtari",
-      "Durg",
-      "Jagdalpur",
-      "Korba",
-      "Mahasamund",
-      "Manendragarh",
-      "Mungeli",
-      "Naila Janjgir",
-      "Raigarh",
-      "Raipur",
-      "Rajnandgaon",
-      "Sakti",
-      "Tilda Newra"
-   ],
-   "Dadra and Nagar Haveli": [
-      "Silvassa"
-   ],
-   "Delhi": [
-      "Delhi",
-      "New Delhi"
-   ],
-   "Goa": [
-      "Mapusa",
-      "Margao",
-      "Marmagao",
-      "Panaji"
-   ],
-   "Gujarat": [
-      "Adalaj",
-      "Ahmedabad",
-      "Amreli",
-      "Anand",
-      "Anjar",
-      "Ankleshwar",
-      "Bharuch",
-      "Bhavnagar",
-      "Bhuj",
-      "Chhapra",
-      "Deesa",
-      "Dhoraji",
-      "Godhra",
-      "Jamnagar",
-      "Kadi",
-      "Kapadvanj",
-      "Keshod",
-      "Khambhat",
-      "Lathi",
-      "Limbdi",
-      "Lunawada",
-      "Mahesana",
-      "Mahuva",
-      "Manavadar",
-      "Mandvi",
-      "Mangrol",
-      "Mansa",
-      "Mahemdabad",
-      "Modasa",
-      "Morvi",
-      "Nadiad",
-      "Navsari",
-      "Padra",
-      "Palanpur",
-      "Palitana",
-      "Pardi",
-      "Patan",
-      "Petlad",
-      "Porbandar",
-      "Radhanpur",
-      "Rajkot",
-      "Rajpipla",
-      "Rajula",
-      "Ranavav",
-      "Rapar",
-      "Salaya",
-      "Sanand",
-      "Savarkundla",
-      "Sidhpur",
-      "Sihor",
-      "Songadh",
-      "Surat",
-      "Talaja",
-      "Thangadh",
-      "Tharad",
-      "Umbergaon",
-      "Umreth",
-      "Una",
-      "Unjha",
-      "Upleta",
-      "Vadnagar",
-      "Vadodara",
-      "Valsad",
-      "Vapi",
-      "Vapi",
-      "Veraval",
-      "Vijapur",
-      "Viramgam",
-      "Visnagar",
-      "Vyara",
-      "Wadhwan",
-      "Wankaner"
-   ],
-   "Haryana": [
-      "Bahadurgarh",
-      "Bhiwani",
-      "Charkhi Dadri",
-      "Faridabad",
-      "Fatehabad",
-      "Gohana",
-      "Gurgaon",
-      "Hansi",
-      "Hisar",
-      "Jind",
-      "Kaithal",
-      "Karnal",
-      "Ladwa",
-      "Mahendragarh",
-      "Mandi Dabwali",
-      "Narnaul",
-      "Narwana",
-      "Palwal",
-      "Panchkula",
-      "Panipat",
-      "Pehowa",
-      "Pinjore",
-      "Rania",
-      "Ratia",
-      "Rewari",
-      "Rohtak",
-      "Safidon",
-      "Samalkha",
-      "Sarsod",
-      "Shahbad",
-      "Sirsa",
-      "Sohna",
-      "Sonipat",
-      "Taraori",
-      "Thanesar",
-      "Tohana",
-      "Yamunanagar"
-   ],
-   "Himachal Pradesh": [
-      "Mandi",
-      "Nahan",
-      "Palampur",
-      "Shimla",
-      "Solan",
-      "Sundarnagar"
-   ],
-   "Jammu and Kashmir": [
-      "Anantnag",
-      "Baramula",
-      "Jammu",
-      "Kathua",
-      "Punch",
-      "Rajauri",
-      "Sopore",
-      "Srinagar",
-      "Udhampur"
-   ],
-   "Jharkhand": [
-      "Adityapur",
-      "Bokaro Steel City",
-      "Chaibasa",
-      "Chatra",
-      "Chirkunda",
-      "Medininagar (Daltonganj)",
-      "Deoghar",
-      "Dhanbad",
-      "Dumka",
-      "Giridih",
-      "Gumia",
-      "Hazaribag",
-      "Jamshedpur",
-      "Jhumri Tilaiya",
-      "Lohardaga",
-      "Madhupur",
-      "Mihijam",
-      "Musabani",
-      "Pakaur",
-      "Patratu",
-      "Phusro",
-      "Ramgarh",
-      "Ranchi",
-      "Sahibganj",
-      "Saunda",
-      "Simdega",
-      "Tenu dam-cum-Kathhara"
-   ],
-   "Karnataka": [
-      "Adyar",
-      "Afzalpur",
-      "Arsikere",
-      "Athni",
-      "Bengaluru",
-      "Belagavi",
-      "Ballari",
-      "Chikkamagaluru",
-      "Davanagere",
-      "Gokak",
-      "Hubli-Dharwad",
-      "Karwar",
-      "Kolar",
-      "Lakshmeshwar",
-      "Lingsugur",
-      "Maddur",
-      "Madhugiri",
-      "Madikeri",
-      "Magadi",
-      "Mahalingapura",
-      "Malavalli",
-      "Malur",
-      "Mandya",
-      "Mangaluru",
-      "Manvi",
-      "Mudalagi",
-      "Mudabidri",
-      "Muddebihal",
-      "Mudhol",
-      "Mulbagal",
-      "Mundargi",
-      "Nanjangud",
-      "Nargund",
-      "Navalgund",
-      "Nelamangala",
-      "Pavagada",
-      "Piriyapatna",
-      "Puttur",
-      "Rabkavi Banhatti",
-      "Raayachuru",
-      "Ranebennuru",
-      "Ramanagaram",
-      "Ramdurg",
-      "Ranibennur",
-      "Robertson Pet",
-      "Ron",
-      "Sadalagi",
-      "Sagara",
-      "Sakaleshapura",
-      "Sindagi",
-      "Sanduru",
-      "Sankeshwara",
-      "Saundatti-Yellamma",
-      "Savanur",
-      "Sedam",
-      "Shahabad",
-      "Shahpur",
-      "Shiggaon",
-      "Shikaripur",
-      "Shivamogga",
-      "Surapura",
-      "Shrirangapattana",
-      "Sidlaghatta",
-      "Sindhagi",
-      "Sindhnur",
-      "Sira",
-      "Sirsi",
-      "Siruguppa",
-      "Srinivaspur",
-      "Tarikere",
-      "Tekkalakote",
-      "Terdal",
-      "Talikota",
-      "Tiptur",
-      "Tumkur",
-      "Udupi",
-      "Vijayapura",
-      "Wadi",
-      "Yadgir"
-   ],
-   "Karnatka": [
-      "Mysore"
-   ],
-   "Kerala": [
-      "Adoor",
-      "Alappuzha",
-      "Attingal",
-      "Chalakudy",
-      "Changanassery",
-      "Cherthala",
-      "Chittur-Thathamangalam",
-      "Guruvayoor",
-      "Kanhangad",
-      "Kannur",
-      "Kasaragod",
-      "Kayamkulam",
-      "Kochi",
-      "Kodungallur",
-      "Kollam",
-      "Kottayam",
-      "Kozhikode",
-      "Kunnamkulam",
-      "Malappuram",
-      "Mattannur",
-      "Mavelikkara",
-      "Mavoor",
-      "Muvattupuzha",
-      "Nedumangad",
-      "Neyyattinkara",
-      "Nilambur",
-      "Ottappalam",
-      "Palai",
-      "Palakkad",
-      "Panamattom",
-      "Panniyannur",
-      "Pappinisseri",
-      "Paravoor",
-      "Pathanamthitta",
-      "Peringathur",
-      "Perinthalmanna",
-      "Perumbavoor",
-      "Ponnani",
-      "Punalur",
-      "Puthuppally",
-      "Koyilandy",
-      "Shoranur",
-      "Taliparamba",
-      "Thiruvalla",
-      "Thiruvananthapuram",
-      "Thodupuzha",
-      "Thrissur",
-      "Tirur",
-      "Vaikom",
-      "Varkala",
-      "Vatakara"
-   ],
-   "Madhya Pradesh": [
-      "Alirajpur",
-      "Ashok Nagar",
-      "Balaghat",
-      "Bhopal",
-      "Ganjbasoda",
-      "Gwalior",
-      "Indore",
-      "Itarsi",
-      "Jabalpur",
-      "Lahar",
-      "Maharajpur",
-      "Mahidpur",
-      "Maihar",
-      "Malaj Khand",
-      "Manasa",
-      "Manawar",
-      "Mandideep",
-      "Mandla",
-      "Mandsaur",
-      "Mauganj",
-      "Mhow Cantonment",
-      "Mhowgaon",
-      "Morena",
-      "Multai",
-      "Mundi",
-      "Murwara (Katni)",
-      "Nagda",
-      "Nainpur",
-      "Narsinghgarh",
-      "Narsinghgarh",
-      "Neemuch",
-      "Nepanagar",
-      "Niwari",
-      "Nowgong",
-      "Nowrozabad (Khodargama)",
-      "Pachore",
-      "Pali",
-      "Panagar",
-      "Pandhurna",
-      "Panna",
-      "Pasan",
-      "Pipariya",
-      "Pithampur",
-      "Porsa",
-      "Prithvipur",
-      "Raghogarh-Vijaypur",
-      "Rahatgarh",
-      "Raisen",
-      "Rajgarh",
-      "Ratlam",
-      "Rau",
-      "Rehli",
-      "Rewa",
-      "Sabalgarh",
-      "Sagar",
-      "Sanawad",
-      "Sarangpur",
-      "Sarni",
-      "Satna",
-      "Sausar",
-      "Sehore",
-      "Sendhwa",
-      "Seoni",
-      "Seoni-Malwa",
-      "Shahdol",
-      "Shajapur",
-      "Shamgarh",
-      "Sheopur",
-      "Shivpuri",
-      "Shujalpur",
-      "Sidhi",
-      "Sihora",
-      "Singrauli",
-      "Sironj",
-      "Sohagpur",
-      "Tarana",
-      "Tikamgarh",
-      "Ujjain",
-      "Umaria",
-      "Vidisha",
-      "Vijaypur",
-      "Wara Seoni"
-   ],
-   "Maharashtra": [
-      [
-         []
-      ],
-      "Ahmednagar",
-      "Akola",
-      "Akot",
-      "Amalner",
-      "Ambejogai",
-      "Amravati",
-      "Anjangaon",
-      "Arvi",
-      "Aurangabad",
-      "Bhiwandi",
-      "Dhule",
-      "Kalyan-Dombivali",
-      "Ichalkaranji",
-      "Kalyan-Dombivali",
-      "Karjat",
-      "Latur",
-      "Loha",
-      "Lonar",
-      "Lonavla",
-      "Mahad",
-      "Malegaon",
-      "Malkapur",
-      "Mangalvedhe",
-      "Mangrulpir",
-      "Manjlegaon",
-      "Manmad",
-      "Manwath",
-      "Mehkar",
-      "Mhaswad",
-      "Mira-Bhayandar",
-      "Morshi",
-      "Mukhed",
-      "Mul",
-      "Greater Mumbai",
-      "Murtijapur",
-      "Nagpur",
-      "Nanded-Waghala",
-      "Nandgaon",
-      "Nandura",
-      "Nandurbar",
-      "Narkhed",
-      "Nashik",
-      "Navi Mumbai",
-      "Nawapur",
-      "Nilanga",
-      "Osmanabad",
-      "Ozar",
-      "Pachora",
-      "Paithan",
-      "Palghar",
-      "Pandharkaoda",
-      "Pandharpur",
-      "Panvel",
-      "Parbhani",
-      "Parli",
-      "Partur",
-      "Pathardi",
-      "Pathri",
-      "Patur",
-      "Pauni",
-      "Pen",
-      "Phaltan",
-      "Pulgaon",
-      "Pune",
-      "Purna",
-      "Pusad",
-      "Rahuri",
-      "Rajura",
-      "Ramtek",
-      "Ratnagiri",
-      "Raver",
-      "Risod",
-      "Sailu",
-      "Sangamner",
-      "Sangli",
-      "Sangole",
-      "Sasvad",
-      "Satana",
-      "Satara",
-      "Savner",
-      "Sawantwadi",
-      "Shahade",
-      "Shegaon",
-      "Shendurjana",
-      "Shirdi",
-      "Shirpur-Warwade",
-      "Shirur",
-      "Shrigonda",
-      "Shrirampur",
-      "Sillod",
-      "Sinnar",
-      "Solapur",
-      "Soyagaon",
-      "Talegaon Dabhade",
-      "Talode",
-      "Tasgaon",
-      "Thane",
-      "Tirora",
-      "Tuljapur",
-      "Tumsar",
-      "Uchgaon",
-      "Udgir",
-      "Umarga",
-      "Umarkhed",
-      "Umred",
-      "Uran",
-      "Uran Islampur",
-      "Vadgaon Kasba",
-      "Vaijapur",
-      "Vasai-Virar",
-      "Vita",
-      "Wadgaon Road",
-      "Wai",
-      "Wani",
-      "Wardha",
-      "Warora",
-      "Warud",
-      "Washim",
-      "Yavatmal",
-      "Yawal",
-      "Yevla"
-   ],
-   "Manipur": [
-      "Imphal",
-      "Lilong",
-      "Mayang Imphal",
-      "Thoubal"
-   ],
-   "Meghalaya": [
-      "Nongstoin",
-      "Shillong",
-      "Tura"
-   ],
-   "Mizoram": [
-      "Aizawl",
-      "Lunglei",
-      "Saiha"
-   ],
-   "Nagaland": [
-      "Dimapur",
-      "Kohima",
-      "Mokokchung",
-      "Tuensang",
-      "Wokha",
-      "Zunheboto"
-   ],
-   "Odisha": [
-      "Balangir",
-      "Baleshwar Town",
-      "Barbil",
-      "Bargarh",
-      "Baripada Town",
-      "Bhadrak",
-      "Bhawanipatna",
-      "Bhubaneswar",
-      "Brahmapur",
-      "Byasanagar",
-      "Cuttack",
-      "Dhenkanal",
-      "Jatani",
-      "Jharsuguda",
-      "Kendrapara",
-      "Kendujhar",
-      "Malkangiri",
-      "Nabarangapur",
-      "Paradip",
-      "Parlakhemundi",
-      "Pattamundai",
-      "Phulabani",
-      "Puri",
-      "Rairangpur",
-      "Rajagangapur",
-      "Raurkela",
-      "Rayagada",
-      "Sambalpur",
-      "Soro",
-      "Sunabeda",
-      "Sundargarh",
-      "Talcher",
-      "Tarbha",
-      "Titlagarh"
-   ],
-   "Puducherry": [
-      "Karaikal",
-      "Mahe",
-      "Pondicherry",
-      "Yanam"
-   ],
-   "Punjab": [
-      "Amritsar",
-      "Barnala",
-      "Batala",
-      "Bathinda",
-      "Dhuri",
-      "Faridkot",
-      "Fazilka",
-      "Firozpur",
-      "Firozpur Cantt.",
-      "Gobindgarh",
-      "Gurdaspur",
-      "Hoshiarpur",
-      "Jagraon",
-      "Jalandhar Cantt.",
-      "Jalandhar",
-      "Kapurthala",
-      "Khanna",
-      "Kharar",
-      "Kot Kapura",
-      "Longowal",
-      "Ludhiana",
-      "Malerkotla",
-      "Malout",
-      "Mansa",
-      "Moga",
-      "Mohali",
-      "Morinda, India",
-      "Mukerian",
-      "Muktsar",
-      "Nabha",
-      "Nakodar",
-      "Nangal",
-      "Nawanshahr",
-      "Pathankot",
-      "Patiala",
-      "Pattran",
-      "Patti",
-      "Phagwara",
-      "Phillaur",
-      "Qadian",
-      "Raikot",
-      "Rajpura",
-      "Rampura Phul",
-      "Rupnagar",
-      "Samana",
-      "Sangrur",
-      "Sirhind Fatehgarh Sahib",
-      "Sujanpur",
-      "Sunam",
-      "Talwara",
-      "Tarn Taran",
-      "Urmar Tanda",
-      "Zira",
-      "Zirakpur"
-   ],
-   "Rajasthan": [
-      "Ajmer",
-      "Alwar",
-      "Bikaner",
-      "Bharatpur",
-      "Bhilwara",
-      "Jaipur",
-      "Jodhpur",
-      "Lachhmangarh",
-      "Ladnu",
-      "Lakheri",
-      "Lalsot",
-      "Losal",
-      "Makrana",
-      "Malpura",
-      "Mandalgarh",
-      "Mandawa",
-      "Mangrol",
-      "Merta City",
-      "Mount Abu",
-      "Nadbai",
-      "Nagar",
-      "Nagaur",
-      "Nasirabad",
-      "Nathdwara",
-      "Neem-Ka-Thana",
-      "Nimbahera",
-      "Nohar",
-      "Nokha",
-      "Pali",
-      "Phalodi",
-      "Phulera",
-      "Pilani",
-      "Pilibanga",
-      "Pindwara",
-      "Pipar City",
-      "Prantij",
-      "Pratapgarh",
-      "Raisinghnagar",
-      "Rajakhera",
-      "Rajaldesar",
-      "Rajgarh (Alwar)",
-      "Rajgarh (Churu)",
-      "Rajsamand",
-      "Ramganj Mandi",
-      "Ramngarh",
-      "Ratangarh",
-      "Rawatbhata",
-      "Rawatsar",
-      "Reengus",
-      "Sadri",
-      "Sadulshahar",
-      "Sadulpur",
-      "Sagwara",
-      "Sambhar",
-      "Sanchore",
-      "Sangaria",
-      "Sardarshahar",
-      "Sawai Madhopur",
-      "Shahpura",
-      "Shahpura",
-      "Sheoganj",
-      "Sikar",
-      "Sirohi",
-      "Sojat",
-      "Sri Madhopur",
-      "Sujangarh",
-      "Sumerpur",
-      "Suratgarh",
-      "Taranagar",
-      "Todabhim",
-      "Todaraisingh",
-      "Tonk",
-      "Udaipur",
-      "Udaipurwati",
-      "Vijainagar, Ajmer"
-   ],
-   "Tamil Nadu": [
-      "Arakkonam",
-      "Aruppukkottai",
-      "Chennai",
-      "Coimbatore",
-      "Erode",
-      "Gobichettipalayam",
-      "Kancheepuram",
-      "Karur",
-      "Lalgudi",
-      "Madurai",
-      "Manachanallur",
-      "Nagapattinam",
-      "Nagercoil",
-      "Namagiripettai",
-      "Namakkal",
-      "Nandivaram-Guduvancheri",
-      "Nanjikottai",
-      "Natham",
-      "Nellikuppam",
-      "Neyveli (TS)",
-      "O' Valley",
-      "Oddanchatram",
-      "P.N.Patti",
-      "Pacode",
-      "Padmanabhapuram",
-      "Palani",
-      "Palladam",
-      "Pallapatti",
-      "Pallikonda",
-      "Panagudi",
-      "Panruti",
-      "Paramakudi",
-      "Parangipettai",
-      "Pattukkottai",
-      "Perambalur",
-      "Peravurani",
-      "Periyakulam",
-      "Periyasemur",
-      "Pernampattu",
-      "Pollachi",
-      "Polur",
-      "Ponneri",
-      "Pudukkottai",
-      "Pudupattinam",
-      "Puliyankudi",
-      "Punjaipugalur",
-      "Ranipet",
-      "Rajapalayam",
-      "Ramanathapuram",
-      "Rameshwaram",
-      "Rasipuram",
-      "Salem",
-      "Sankarankoil",
-      "Sankari",
-      "Sathyamangalam",
-      "Sattur",
-      "Shenkottai",
-      "Sholavandan",
-      "Sholingur",
-      "Sirkali",
-      "Sivaganga",
-      "Sivagiri",
-      "Sivakasi",
-      "Srivilliputhur",
-      "Surandai",
-      "Suriyampalayam",
-      "Tenkasi",
-      "Thammampatti",
-      "Thanjavur",
-      "Tharamangalam",
-      "Tharangambadi",
-      "Theni Allinagaram",
-      "Thirumangalam",
-      "Thirupuvanam",
-      "Thiruthuraipoondi",
-      "Thiruvallur",
-      "Thiruvarur",
-      "Thuraiyur",
-      "Tindivanam",
-      "Tiruchendur",
-      "Tiruchengode",
-      "Tiruchirappalli",
-      "Tirukalukundram",
-      "Tirukkoyilur",
-      "Tirunelveli",
-      "Tirupathur",
-      "Tirupathur",
-      "Tiruppur",
-      "Tiruttani",
-      "Tiruvannamalai",
-      "Tiruvethipuram",
-      "Tittakudi",
-      "Udhagamandalam",
-      "Udumalaipettai",
-      "Unnamalaikadai",
-      "Usilampatti",
-      "Uthamapalayam",
-      "Uthiramerur",
-      "Vadakkuvalliyur",
-      "Vadalur",
-      "Vadipatti",
-      "Valparai",
-      "Vandavasi",
-      "Vaniyambadi",
-      "Vedaranyam",
-      "Vellakoil",
-      "Vellore",
-      "Vikramasingapuram",
-      "Viluppuram",
-      "Virudhachalam",
-      "Virudhunagar",
-      "Viswanatham"
-   ],
-   "Telangana": [
-      "Adilabad",
-      "Bellampalle",
-      "Bhadrachalam",
-      "Bhainsa",
-      "Bhongir",
-      "Bodhan",
-      "Farooqnagar",
-      "Gadwal",
-      "Hyderabad",
-      "Jagtial",
-      "Jangaon",
-      "Kagaznagar",
-      "Kamareddy",
-      "Karimnagar",
-      "Khammam",
-      "Koratla",
-      "Kothagudem",
-      "Kyathampalle",
-      "Mahbubnagar",
-      "Mancherial",
-      "Mandamarri",
-      "Manuguru",
-      "Medak",
-      "Miryalaguda",
-      "Nagarkurnool",
-      "Narayanpet",
-      "Nirmal",
-      "Nizamabad",
-      "Palwancha",
-      "Ramagundam",
-      "Sadasivpet",
-      "Sangareddy",
-      "Siddipet",
-      "Sircilla",
-      "Suryapet",
-      "Tandur",
-      "Vikarabad",
-      "Wanaparthy",
-      "Warangal",
-      "Yellandu"
-   ],
-   "Tripura": [
-      "Agartala",
-      "Belonia",
-      "Dharmanagar",
-      "Kailasahar",
-      "Khowai",
-      "Pratapgarh",
-      "Udaipur"
-   ],
-   "Uttar Pradesh": [
-      "Achhnera",
-      "Agra",
-      "Aligarh",
-      "Allahabad",
-      "Amroha",
-      "Azamgarh",
-      "Bahraich",
-      "Chandausi",
-      "Etawah",
-      "Firozabad",
-      "Fatehpur Sikri",
-      "Hapur",
-      "Hardoi ",
-      "Jhansi",
-      "Kalpi",
-      "Kanpur",
-      "Khair",
-      "Laharpur",
-      "Lakhimpur",
-      "Lal Gopalganj Nindaura",
-      "Lalitpur",
-      "Lalganj",
-      "Lar",
-      "Loni",
-      "Lucknow",
-      "Mathura",
-      "Meerut",
-      "Modinagar",
-      "Moradabad",
-      "Nagina",
-      "Najibabad",
-      "Nakur",
-      "Nanpara",
-      "Naraura",
-      "Naugawan Sadat",
-      "Nautanwa",
-      "Nawabganj",
-      "Nehtaur",
-      "Niwai",
-      "Noida",
-      "Noorpur",
-      "Obra",
-      "Orai",
-      "Padrauna",
-      "Palia Kalan",
-      "Parasi",
-      "Phulpur",
-      "Pihani",
-      "Pilibhit",
-      "Pilkhuwa",
-      "Powayan",
-      "Pukhrayan",
-      "Puranpur",
-      "Purquazi",
-      "Purwa",
-      "Rae Bareli",
-      "Rampur",
-      "Rampur Maniharan",
-      "Rampur Maniharan",
-      "Rasra",
-      "Rath",
-      "Renukoot",
-      "Reoti",
-      "Robertsganj",
-      "Rudauli",
-      "Rudrapur",
-      "Sadabad",
-      "Safipur",
-      "Saharanpur",
-      "Sahaspur",
-      "Sahaswan",
-      "Sahawar",
-      "Sahjanwa",
-      "Saidpur",
-      "Sambhal",
-      "Samdhan",
-      "Samthar",
-      "Sandi",
-      "Sandila",
-      "Sardhana",
-      "Seohara",
-      "Shahabad, Hardoi",
-      "Shahabad, Rampur",
-      "Shahganj",
-      "Shahjahanpur",
-      "Shamli",
-      "Shamsabad, Agra",
-      "Shamsabad, Farrukhabad",
-      "Sherkot",
-      "Shikarpur, Bulandshahr",
-      "Shikohabad",
-      "Shishgarh",
-      "Siana",
-      "Sikanderpur",
-      "Sikandra Rao",
-      "Sikandrabad",
-      "Sirsaganj",
-      "Sirsi",
-      "Sitapur",
-      "Soron",
-      "Suar",
-      "Sultanpur",
-      "Sumerpur",
-      "Tanda",
-      "Thakurdwara",
-      "Thana Bhawan",
-      "Tilhar",
-      "Tirwaganj",
-      "Tulsipur",
-      "Tundla",
-      "Ujhani",
-      "Unnao",
-      "Utraula",
-      "Varanasi",
-      "Vrindavan",
-      "Warhapur",
-      "Zaidpur",
-      "Zamania"
-   ],
-   "Uttarakhand": [
-      "Bageshwar",
-      "Dehradun",
-      "Haldwani-cum-Kathgodam",
-      "Hardwar",
-      "Kashipur",
-      "Manglaur",
-      "Mussoorie",
-      "Nagla",
-      "Nainital",
-      "Pauri",
-      "Pithoragarh",
-      "Ramnagar",
-      "Rishikesh",
-      "Roorkee",
-      "Rudrapur",
-      "Sitarganj",
-      "Srinagar",
-      "Tehri"
-   ],
-   "West Bengal": [
-      "Adra",
-      "Alipurduar",
-      "Arambagh",
-      "Asansol",
-      "Baharampur",
-      "Balurghat",
-      "Bankura",
-      "Darjiling",
-      "English Bazar",
-      "Gangarampur",
-      "Habra",
-      "Hugli-Chinsurah",
-      "Jalpaiguri",
-      "Jhargram",
-      "Kalimpong",
-      "Kharagpur",
-      "Kolkata",
-      "Mainaguri",
-      "Malda",
-      "Mathabhanga",
-      "Medinipur",
-      "Memari",
-      "Monoharpur",
-      "Murshidabad",
-      "Nabadwip",
-      "Naihati",
-      "Panchla",
-      "Pandua",
-      "Paschim Punropara",
-      "Purulia",
-      "Raghunathpur",
-      "Raghunathganj",
-      "Raiganj",
-      "Rampurhat",
-      "Ranaghat",
-      "Sainthia",
-      "Santipur",
-      "Siliguri",
-      "Sonamukhi",
-      "Srirampore",
-      "Suri",
-      "Taki",
-      "Tamluk",
-      "Tarakeswar"
-   ]
-}
+            
+                "took": 31,
+                "timed_out": false,
+                "_shards": {
+                  "total": 5,
+                  "successful": 5,
+                  "failed": 0
+                },
+                "hits": {
+                  "total": 157255,
+                  "max_score": 0,
+                  "hits": []
+                },
+                "aggregations": {
+                  "2": {
+                    "doc_count_error_upper_bound": 0,
+                    "sum_other_doc_count": 0,
+                    "buckets": [
+                      {
+                        "3": {
+                          "doc_count_error_upper_bound": 0,
+                          "sum_other_doc_count": 0,
+                          "buckets": [
+                            {
+                              "key": "Coimbatore",
+                              "doc_count": 5255
+                            },
+                            {
+                              "key": "Dindigul",
+                              "doc_count": 4879
+                            },
+                            {
+                              "key": "Thiruvallur",
+                              "doc_count": 4028
+                            },
+                            {
+                              "key": "Thirunelveli",
+                              "doc_count": 3833
+                            },
+                            {
+                              "key": "Villupuram",
+                              "doc_count": 3787
+                            },
+                            {
+                              "key": "Madurai",
+                              "doc_count": 3784
+                            },
+                            {
+                              "key": "",
+                              "doc_count": 3412
+                            },
+                            {
+                              "key": "Karur",
+                              "doc_count": 3111
+                            },
+                            {
+                              "key": "Salem",
+                              "doc_count": 2577
+                            },
+                            {
+                              "key": "Chennai",
+                              "doc_count": 1429
+                            },
+                            {
+                              "key": "Kanchipuram",
+                              "doc_count": 1303
+                            },
+                            {
+                              "key": "Pudukkottai",
+                              "doc_count": 1142
+                            },
+                            {
+                              "key": "Vellore",
+                              "doc_count": 1085
+                            },
+                            {
+                              "key": "Villpuram",
+                              "doc_count": 1023
+                            },
+                            {
+                              "key": "Tuticorin",
+                              "doc_count": 918
+                            },
+                            {
+                              "key": "Tiruchirappalli",
+                              "doc_count": 905
+                            },
+                            {
+                              "key": "Perambalur",
+                              "doc_count": 830
+                            },
+                            {
+                              "key": "Virudhunagar",
+                              "doc_count": 720
+                            },
+                            {
+                              "key": "Tirunelveli",
+                              "doc_count": 700
+                            },
+                            {
+                              "key": "Kanniyakumari",
+                              "doc_count": 670
+                            },
+                            {
+                              "key": "Dharmapuri",
+                              "doc_count": 516
+                            },
+                            {
+                              "key": "Namakkal",
+                              "doc_count": 484
+                            },
+                            {
+                              "key": "Thanjavur",
+                              "doc_count": 429
+                            },
+                            {
+                              "key": "Thiruvannamalai",
+                              "doc_count": 387
+                            },
+                            {
+                              "key": "TIRUVALLUR",
+                              "doc_count": 351
+                            },
+                            {
+                              "key": "Sivagangai",
+                              "doc_count": 337
+                            },
+                            {
+                              "key": "Kanyakumari",
+                              "doc_count": 302
+                            },
+                            {
+                              "key": "Cuddalore",
+                              "doc_count": 186
+                            },
+                            {
+                              "key": "Sivakasi",
+                              "doc_count": 184
+                            },
+                            {
+                              "key": "Erode",
+                              "doc_count": 140
+                            },
+                            {
+                              "key": "Krishnagiri",
+                              "doc_count": 126
+                            },
+                            {
+                              "key": "Nagapattinam",
+                              "doc_count": 110
+                            },
+                            {
+                              "key": "Tirupur",
+                              "doc_count": 110
+                            },
+                            {
+                              "key": "Tiruppur",
+                              "doc_count": 76
+                            },
+                            {
+                              "key": "Sivaganga",
+                              "doc_count": 63
+                            },
+                            {
+                              "key": "Theni",
+                              "doc_count": 53
+                            },
+                            {
+                              "key": "Trichirappalli",
+                              "doc_count": 15
+                            },
+                            {
+                              "key": "Tiruchirapalli",
+                              "doc_count": 1
+                            }
+                          ]
+                        },
+                        "key": "Tamil Nadu",
+                        "doc_count": 49261
+                      },
+                      {
+                        "3": {
+                          "doc_count_error_upper_bound": 0,
+                          "sum_other_doc_count": 0,
+                          "buckets": [
+                            {
+                              "key": "Mumbai",
+                              "doc_count": 5983
+                            },
+                            {
+                              "key": "Pune",
+                              "doc_count": 4564
+                            },
+                            {
+                              "key": "",
+                              "doc_count": 3342
+                            },
+                            {
+                              "key": "Nagpur",
+                              "doc_count": 2434
+                            },
+                            {
+                              "key": "Jalgaon",
+                              "doc_count": 956
+                            },
+                            {
+                              "key": "Sangli",
+                              "doc_count": 796
+                            },
+                            {
+                              "key": "Solapur",
+                              "doc_count": 648
+                            },
+                            {
+                              "key": "Ratnagiri",
+                              "doc_count": 604
+                            },
+                            {
+                              "key": "Yavatmal",
+                              "doc_count": 601
+                            },
+                            {
+                              "key": "Kolhapur",
+                              "doc_count": 510
+                            },
+                            {
+                              "key": "Amravati",
+                              "doc_count": 473
+                            },
+                            {
+                              "key": "Osmanabad",
+                              "doc_count": 280
+                            },
+                            {
+                              "key": "Ambajogai",
+                              "doc_count": 267
+                            },
+                            {
+                              "key": "Ashta",
+                              "doc_count": 257
+                            },
+                            {
+                              "key": "Aurangabad",
+                              "doc_count": 252
+                            },
+                            {
+                              "key": "Chilkhli",
+                              "doc_count": 246
+                            },
+                            {
+                              "key": "Nashik",
+                              "doc_count": 226
+                            },
+                            {
+                              "key": "Akola",
+                              "doc_count": 202
+                            },
+                            {
+                              "key": "AHMEDNAGAR",
+                              "doc_count": 186
+                            },
+                            {
+                              "key": "Palghar",
+                              "doc_count": 173
+                            },
+                            {
+                              "key": "Vashi",
+                              "doc_count": 144
+                            },
+                            {
+                              "key": "Belapur",
+                              "doc_count": 138
+                            },
+                            {
+                              "key": "Thane",
+                              "doc_count": 126
+                            },
+                            {
+                              "key": "Ahmednagar",
+                              "doc_count": 99
+                            },
+                            {
+                              "key": "Pandharpur",
+                              "doc_count": 93
+                            },
+                            {
+                              "key": "Satara",
+                              "doc_count": 74
+                            },
+                            {
+                              "key": "Chandrapur",
+                              "doc_count": 33
+                            },
+                            {
+                              "key": "Baramati",
+                              "doc_count": 31
+                            },
+                            {
+                              "key": "Jalna",
+                              "doc_count": 21
+                            }
+                          ]
+                        },
+                        "key": "Maharashtra",
+                        "doc_count": 23759
+                      },
+                      {
+                        "3": {
+                          "doc_count_error_upper_bound": 0,
+                          "sum_other_doc_count": 0,
+                          "buckets": [
+                            {
+                              "key": "Ghaziabad",
+                              "doc_count": 6076
+                            },
+                            {
+                              "key": "Meerut",
+                              "doc_count": 3878
+                            },
+                            {
+                              "key": "Mathura",
+                              "doc_count": 3435
+                            },
+                            {
+                              "key": "Noida",
+                              "doc_count": 3159
+                            },
+                            {
+                              "key": "Modinagr",
+                              "doc_count": 1116
+                            },
+                            {
+                              "key": "Allahabad",
+                              "doc_count": 1021
+                            },
+                            {
+                              "key": "Bareilly",
+                              "doc_count": 867
+                            },
+                            {
+                              "key": "Lucknow",
+                              "doc_count": 791
+                            },
+                            {
+                              "key": "Agra",
+                              "doc_count": 665
+                            },
+                            {
+                              "key": "Kanpur",
+                              "doc_count": 383
+                            },
+                            {
+                              "key": "Mohan Nagar",
+                              "doc_count": 203
+                            },
+                            {
+                              "key": "Modinagar",
+                              "doc_count": 200
+                            },
+                            {
+                              "key": "Varanasi",
+                              "doc_count": 161
+                            },
+                            {
+                              "key": "Gorakhpur",
+                              "doc_count": 153
+                            },
+                            {
+                              "key": "Jhansi",
+                              "doc_count": 122
+                            },
+                            {
+                              "key": "Aligarh",
+                              "doc_count": 118
+                            },
+                            {
+                              "key": "Ghorakhpur",
+                              "doc_count": 77
+                            },
+                            {
+                              "key": "Mirzamurad",
+                              "doc_count": 38
+                            },
+                            {
+                              "key": "Tehsil Bilaspur",
+                              "doc_count": 33
+                            },
+                            {
+                              "key": "",
+                              "doc_count": 31
+                            },
+                            {
+                              "key": "Chola",
+                              "doc_count": 29
+                            },
+                            {
+                              "key": "Bijnor",
+                              "doc_count": 28
+                            },
+                            {
+                              "key": "Unnao",
+                              "doc_count": 18
+                            },
+                            {
+                              "key": "Muzaffarnagar",
+                              "doc_count": 17
+                            },
+                            {
+                              "key": "Barabanki",
+                              "doc_count": 8
+                            },
+                            {
+                              "key": "Muradnagar",
+                              "doc_count": 3
+                            },
+                            {
+                              "key": "Shamli",
+                              "doc_count": 2
+                            }
+                          ]
+                        },
+                        "key": "Uttar Pradesh",
+                        "doc_count": 22632
+                      },
+                      {
+                        "3": {
+                          "doc_count_error_upper_bound": 0,
+                          "sum_other_doc_count": 0,
+                          "buckets": [
+                            {
+                              "key": "",
+                              "doc_count": 12480
+                            },
+                            {
+                              "key": "Hyderabad",
+                              "doc_count": 6461
+                            },
+                            {
+                              "key": "Karimnagar",
+                              "doc_count": 203
+                            },
+                            {
+                              "key": "Warangal",
+                              "doc_count": 153
+                            },
+                            {
+                              "key": "Khairatabad",
+                              "doc_count": 19
+                            }
+                          ]
+                        },
+                        "key": "Telangana",
+                        "doc_count": 19316
+                      },
+                      {
+                        "3": {
+                          "doc_count_error_upper_bound": 0,
+                          "sum_other_doc_count": 0,
+                          "buckets": [
+                            {
+                              "key": "",
+                              "doc_count": 17335
+                            },
+                            {
+                              "key": "Anantapur",
+                              "doc_count": 1005
+                            }
+                          ]
+                        },
+                        "key": "Andhra Pradesh",
+                        "doc_count": 18340
+                      },
+                      {
+                        "3": {
+                          "doc_count_error_upper_bound": 0,
+                          "sum_other_doc_count": 0,
+                          "buckets": [
+                            {
+                              "key": "Ernakulam",
+                              "doc_count": 2349
+                            },
+                            {
+                              "key": "Thrissur",
+                              "doc_count": 2012
+                            },
+                            {
+                              "key": "Thiruvananthapuram",
+                              "doc_count": 1723
+                            },
+                            {
+                              "key": "Palakkad",
+                              "doc_count": 977
+                            },
+                            {
+                              "key": "Kollam",
+                              "doc_count": 913
+                            },
+                            {
+                              "key": "Kannur",
+                              "doc_count": 676
+                            },
+                            {
+                              "key": "",
+                              "doc_count": 542
+                            },
+                            {
+                              "key": "Alappuzha",
+                              "doc_count": 503
+                            },
+                            {
+                              "key": "Kottayam",
+                              "doc_count": 277
+                            },
+                            {
+                              "key": "Thalassery",
+                              "doc_count": 210
+                            },
+                            {
+                              "key": "Idukki",
+                              "doc_count": 189
+                            },
+                            {
+                              "key": "Kasaragod",
+                              "doc_count": 170
+                            },
+                            {
+                              "key": "Pathanamthitta",
+                              "doc_count": 162
+                            },
+                            {
+                              "key": "Kozhikode",
+                              "doc_count": 117
+                            },
+                            {
+                              "key": "Wayanad",
+                              "doc_count": 105
+                            },
+                            {
+                              "key": "Trivandrum",
+                              "doc_count": 98
+                            },
+                            {
+                              "key": "Palakad",
+                              "doc_count": 68
+                            }
+                          ]
+                        },
+                        "key": "Kerala",
+                        "doc_count": 11091
+                      },
+                      {
+                        "3": {
+                          "doc_count_error_upper_bound": 0,
+                          "sum_other_doc_count": 0,
+                          "buckets": [
+                            {
+                              "key": "Bangalore",
+                              "doc_count": 4112
+                            },
+                            {
+                              "key": "Bengaluru",
+                              "doc_count": 699
+                            },
+                            {
+                              "key": "Hubli",
+                              "doc_count": 650
+                            },
+                            {
+                              "key": "Ballari",
+                              "doc_count": 624
+                            },
+                            {
+                              "key": "Belgaum",
+                              "doc_count": 397
+                            },
+                            {
+                              "key": "Mangalore",
+                              "doc_count": 342
+                            },
+                            {
+                              "key": "",
+                              "doc_count": 333
+                            },
+                            {
+                              "key": "Haliyal",
+                              "doc_count": 320
+                            },
+                            {
+                              "key": "Dharwad",
+                              "doc_count": 317
+                            },
+                            {
+                              "key": "Shivamogga",
+                              "doc_count": 124
+                            },
+                            {
+                              "key": "Mysore",
+                              "doc_count": 77
+                            },
+                            {
+                              "key": "Vijayapura",
+                              "doc_count": 55
+                            },
+                            {
+                              "key": "Gadag",
+                              "doc_count": 48
+                            },
+                            {
+                              "key": "Kolar",
+                              "doc_count": 47
+                            },
+                            {
+                              "key": "Davanagere",
+                              "doc_count": 42
+                            },
+                            {
+                              "key": "Raichur",
+                              "doc_count": 4
+                            }
+                          ]
+                        },
+                        "key": "Karnataka",
+                        "doc_count": 8191
+                      },
+                      {
+                        "3": {
+                          "doc_count_error_upper_bound": 0,
+                          "sum_other_doc_count": 0,
+                          "buckets": [
+                            {
+                              "key": "Rajkot",
+                              "doc_count": 1742
+                            },
+                            {
+                              "key": "Anand",
+                              "doc_count": 526
+                            },
+                            {
+                              "key": "Mehsana",
+                              "doc_count": 332
+                            },
+                            {
+                              "key": "Nadiad",
+                              "doc_count": 249
+                            },
+                            {
+                              "key": "Surat",
+                              "doc_count": 200
+                            },
+                            {
+                              "key": "Junagadh",
+                              "doc_count": 115
+                            },
+                            {
+                              "key": "Kutch",
+                              "doc_count": 73
+                            },
+                            {
+                              "key": "Bharuch",
+                              "doc_count": 63
+                            },
+                            {
+                              "key": "Gandhinagar",
+                              "doc_count": 45
+                            },
+                            {
+                              "key": "Vadodara",
+                              "doc_count": 44
+                            },
+                            {
+                              "key": "Ahmedabad",
+                              "doc_count": 38
+                            },
+                            {
+                              "key": "Navsari",
+                              "doc_count": 18
+                            },
+                            {
+                              "key": "Bhavnagar",
+                              "doc_count": 7
+                            },
+                            {
+                              "key": "Wadhwan",
+                              "doc_count": 7
+                            }
+                          ]
+                        },
+                        "key": "Gujarat",
+                        "doc_count": 3459
+                      },
+                      {
+                        "3": {
+                          "doc_count_error_upper_bound": 0,
+                          "sum_other_doc_count": 0,
+                          "buckets": [
+                            {
+                              "key": "Karur",
+                              "doc_count": 881
+                            },
+                            {
+                              "key": "Pudukkottai",
+                              "doc_count": 39
+                            }
+                          ]
+                        },
+                        "key": "Tamilnadu",
+                        "doc_count": 920
+                      },
+                      {
+                        "3": {
+                          "doc_count_error_upper_bound": 0,
+                          "sum_other_doc_count": 0,
+                          "buckets": [
+                            {
+                              "key": "",
+                              "doc_count": 286
+                            }
+                          ]
+                        },
+                        "key": "Taimil Nadu",
+                        "doc_count": 286
+                      }
+                    ]
+                  }
+                },
+                "status": 200
+              }
+            
     }
 }
