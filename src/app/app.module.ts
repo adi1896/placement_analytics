@@ -21,6 +21,7 @@ import { LoginComponent } from './components/login/login.component';
 import {ElasticsearchService} from './elasticsearch.service';
 import { SignupComponent } from './components/signup/signup.component';
 import { AdsComponent } from './components/ads/ads.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -50,6 +51,7 @@ const appRoutes: Routes =[
     BrowserModule,
     HttpClientModule,
     HttpModule,
+    NgxPaginationModule,
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],

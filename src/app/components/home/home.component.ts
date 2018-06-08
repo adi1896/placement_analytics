@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform  } from '@angular/core';
 import { uniqueList } from './uniqueList';
 import { ServiceService } from '../../service.service';
 import { HttpClient } from '@angular/common/http';
@@ -182,9 +182,110 @@ export class HomeComponent implements OnInit {
       }
     };
     this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
+      elasticresults => { this.elasticresults = elasticresults;  });
+    console.log("ELASTICRESULT", this.elasticresults);
+
+  }
+
+  EP_College(college, state, city) {
+    this.DispResList.clear();
+    let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
+    let search = new URLSearchParams();
+    //console.log("Page Index(elasticPOst):", this.pageNo)
+    let obj ={
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "query_string": {
+                "query": "*",
+                "analyze_wildcard": false
+              }
+            },
+            {
+              "query_string": {
+                "query": "*",
+                "analyze_wildcard": false
+              }
+            },
+            {
+              "range": {
+                "Date": {
+                  "gte": 1370456813443,
+                  "lte": 1528223213444,
+                  "format": "epoch_millis"
+                }
+              }
+            },
+             {
+                      "match": {
+                        "State": state
+                      }
+                    },
+                    {
+                      "match": {
+                        "City": city
+                      }
+                    }
+          ],
+          "must_not": []
+        }
+      },
+      "size": 0,
+      "_source": {
+        "excludes": []
+      },
+      "aggs": {
+        "2": {
+          "terms": {
+            "field": "Full_Name",
+            "size": 5,
+            "order": {
+              "_count": "desc"
+            }
+          },
+          "aggs": {
+            "3": {
+              "terms": {
+                "field": "Batch",
+                "size": 5,
+                "order": {
+                  "_count": "desc"
+                }
+              },
+              "aggs": {
+                "4": {
+                  "terms": {
+                    "field": "Branch",
+                    "size": 5,
+                    "order": {
+                      "_count": "desc"
+                    }
+                  },
+                  "aggs": {
+                    "5": {
+                      "terms": {
+                        "field": "Name_of_the_company .keyword",
+                        "size": 5,
+                        "order": {
+                          "_count": "desc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+    this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
       elasticresults => { this.elasticresults = elasticresults; this.setPage(1); });
     console.log("ELASTICRESULT", this.elasticresults);
+
       var i, k, l, j;
+      var count2017 = "", count2016 = "", count2015 = "", count2014 = "", count2013 = "", count2012 = "";
      
     for(i=0; i< this.elasticresults.aggregations[2].buckets.length; i++)
     {
@@ -194,24 +295,97 @@ export class HomeComponent implements OnInit {
         // {
         //   for(l=0; l< this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets.length; l++)
         //   {
-            
-            this.DispResList.add ({"college" : this.elasticresults.aggregations[2].buckets[i].key, "batch": this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key, 
-            // "branch": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k].key, "company": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets[l].key,
-            "count": this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count} );
-            // console.log("DOONE", this.DispResList);
-      //     }
-      //   }
+            if("2017" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+            {
+               count2017 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+            }
+            if("2016" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+            {
+               count2016 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+            }
+            if("2015" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+            {
+               count2015 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+            }
+            if("2014" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+            {
+               count2014 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+            }
+            if("2013" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+            {
+               count2013 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+            }
+            if("2012" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+            {
+               count2012 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+            }            
+        //   }
+        // }
          }
+         this.DispResList.add ({"college" : this.elasticresults.aggregations[2].buckets[i].key, "c2k17":count2017, "c2k16" :count2016, "c2k15" :count2015, "c2k14" : count2014, "c2k13": count2013, "c2k12": count2012
+            // "branch": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k].key, "company": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets[l].key,
+            } );
     }
+
     console.log("DISPRESLIST:", this.DispResList);
   }
+
+  listCompilation(){
+  
+    var i, k, l, j;
+    var count2017 = "", count2016 = "", count2015 = "", count2014 = "", count2013 = "", count2012 = "";
+   
+  for(i=0; i< this.elasticresults.aggregations[2].buckets.length; i++)
+  {
+    for(j=0; j< this.elasticresults.aggregations[2].buckets[i][3].buckets.length; j++)
+    {
+      // for(k=0; k< this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets.length; k++)
+      // {
+      //   for(l=0; l< this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets.length; l++)
+      //   {
+          if("2017" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+          {
+             count2017 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }
+          if("2016" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+          {
+             count2016 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }
+          if("2015" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+          {
+             count2015 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }
+          if("2014" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+          {
+             count2014 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }
+          if("2013" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+          {
+             count2013 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }
+          if("2012" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
+          {
+             count2012 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }            
+      //   }
+      // }
+       }
+       this.DispResList.add ({"college" : this.elasticresults.aggregations[2].buckets[i].key, "c2k17":count2017, "c2k16" :count2016, "c2k15" :count2015, "c2k14" : count2014, "c2k13": count2013, "c2k12": count2012
+          // "branch": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k].key, "company": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets[l].key,
+          } );
+          // console.log("DOONE", this.DispResList);
+  }
+
+  console.log("DISPRESLIST:", this.DispResList);
+
+  }
+
 
   PostForUList()
   {
       this.DispResList.clear();
       let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
       let search = new URLSearchParams();
-      console.log("Page Index(elasticPOst):", this.pageNo)
       let obj ={
         "query": {
           "bool": {
@@ -296,19 +470,12 @@ export class HomeComponent implements OnInit {
     this.http.get('http://192.168.0.3:9200/jobs1/_search?pretty&filter_path=hits').map(res => res.json()).subscribe(
       list_jobs1 => {
         this.list_jobs1 = list_jobs1;
-        console.log("I CAN SEE DATA HERE: ", this.list_jobs1);
         this.dataCount = this.list_jobs1.hits.total;
-        console.log("THE TOOOOTAL COUNT OF DAAAAAAATA IS:", this.dataCount);
+        console.log("DataCount:", this.dataCount);
       }
     );
 
     this.uniqueList = new uniqueList().getJsonCategeries();
-    this.state = Object.keys(this.uniqueList);
-    console.log("UNIQUE LIST READY: ", this.uniqueList);
-
-    console.log("STAAAAAAAAAAAATE:", this.uniqueList.aggregations[2].buckets[1].key)
-    console.log("hvuvhh", this.state);
-    console.log(this.uniqueList.Delhi);
   }
   getcity(state) {
     var key: any;
@@ -319,20 +486,15 @@ export class HomeComponent implements OnInit {
     { 
       if(this.uniqueList.aggregations[2].buckets[i].key == state)
       {
-        for(j=0; this.uniqueList.aggregations[2].buckets[i][3].buckets.length; j++)
+        for(j=0; j< this.uniqueList.aggregations[2].buckets[i][3].buckets.length; j++)
         {
           if(this.uniqueList.aggregations[2].buckets[i][3].buckets[j].key != "")
           {
             this.city.add(this.uniqueList.aggregations[2].buckets[i][3].buckets[j].key);
-             console.log("CIIIITY:", this.city);
           }
         }
       }
     }
-
-    // for ( key , val in this.uniqueList) {
-
-    // }
   }
 //   searchresult(country, state, city) {
 //     console.log("hellooooooldksncoldsino", country, state, city)

@@ -21,14 +21,14 @@
 
           <div class="form-group col-md-3">
 
-            <select class="form-control" name="city" [(ngModel)]="model.city" style="height: 50px;font-size: 18px;">
+            <select class="form-control" (change)="elasticPost(country.value,model.state,model.city)" name="city" [(ngModel)]="model.city" style="height: 50px;font-size: 18px;">
               <option value="" style="display:none">CITY</option>
               <option *ngFor="let c of city" [ngValue]="c">{{c}}</option>
             </select>
           </div>
           <div class="form-group col-md-3 text-center">
 
-            <button class="button" (click)="elasticPost(country.value,model.state,model.city)" type="submit">Submit</button>
+            <button class="button" (click)="listCompilation()" type="submit">Submit</button>
 
           </div>
         </div>
@@ -113,22 +113,30 @@
             <tr>
               <th scope="col">Sr.No</th>
               <th scope="col">Name of the College</th>
-              <th scope="col">Batch No.</th>
-              <th scope="col">No. of grads placed</th>
+              <th scope="col">Batch 2k17</th>
+              <th scope="col">Batch 2k16</th>
+              <th scope="col">Batch 2k15</th>
+              <th scope="col">Batch 2k14</th>
+              <th scope="col">Batch 2k13</th>
+              <th scope="col">Batch 2k12</th>
             </tr>
           </thead>
 
           <tbody>
-            <tr *ngFor="let r of DispResList; let i = index">
+            <tr *ngFor="let r of DispResList |  paginate: { itemsPerPage:5, currentPage: p }; let i = index">
                 <td>{{i + 1}}</td>
                 <td>{{r.college}}</td>  
-                <td>{{r.batch}}</td>  
-                <td>{{r.count}}</td> 
+                <td>{{r.c2k17}}</td>  
+                <td>{{r.c2k16}}</td>  
+                <td>{{r.c2k15}}</td>  
+                <td>{{r.c2k14}}</td>  
+                <td>{{r.c2k13}}</td>  
+                <td>{{r.c2k12}}</td>  
             </tr>
           </tbody>
        </table>
 
-       <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+       <pagination-controls (pageChange)="p = $event"></pagination-controls>
 <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
   <li [ngClass]="{disabled:pager.currentPage === 1}">
       <a (click)="setPage(1)">First</a>

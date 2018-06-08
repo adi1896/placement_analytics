@@ -14,15 +14,15 @@ export class ContactComponent implements OnInit {
   constructor(private es: ElasticsearchService) { }
 
   ngOnInit() {
-    this.es.getAllDocuments()
-    .then(response => {
-      this.customerSources = response.hits.hits;
-      console.log(response);
-    }, error => {
-      console.error(error);
-    }).then(() => {
-      console.log('Show Customer Completed!');
-    });
+    // this.es.getAllDocuments()
+    // .then(response => {
+    //   this.customerSources = response.hits.hits;
+    //   console.log(response);
+    // }, error => {
+    //   console.error(error);
+    // }).then(() => {
+    //   console.log('Show Customer Completed!');
+    // });
   }
 
 }
