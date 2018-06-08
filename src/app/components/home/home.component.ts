@@ -89,7 +89,6 @@ export class HomeComponent implements OnInit {
   constructor(private http: Http) { }
 
   elasticPost(country, state, city) {
-    this.DispResList.clear();
     let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
     let search = new URLSearchParams();
     console.log("Page Index(elasticPOst):", this.pageNo)
@@ -99,35 +98,35 @@ export class HomeComponent implements OnInit {
           "must": [
             {
               "query_string": {
-                "query": "*",
-                "analyze_wildcard": false
+                "analyze_wildcard": false,
+                "query": "*"
               }
             },
             {
               "query_string": {
-                "query": "*",
-                "analyze_wildcard": false
+                "analyze_wildcard": false,
+                "query": "*"
               }
             },
             {
               "range": {
                 "Date": {
-                  "gte": 1370456813443,
-                  "lte": 1528223213444,
+                  "gte": 1370719940786,
+                  "lte": 1528486340786,
                   "format": "epoch_millis"
                 }
               }
             },
-             {
-                      "match": {
-                        "State": state
-                      }
-                    },
-                    {
-                      "match": {
-                        "City": city
-                      }
-                    }
+            {
+                          "match": {
+                            "State": state
+                          }
+                        },
+                        {
+                          "match": {
+                            "City": city
+                          }
+                        }
           ],
           "must_not": []
         }
@@ -140,7 +139,7 @@ export class HomeComponent implements OnInit {
         "2": {
           "terms": {
             "field": "Full_Name",
-            "size": 5,
+            "size": 281,
             "order": {
               "_count": "desc"
             }
@@ -149,7 +148,7 @@ export class HomeComponent implements OnInit {
             "3": {
               "terms": {
                 "field": "Batch",
-                "size": 5,
+                "size": 25,
                 "order": {
                   "_count": "desc"
                 }
@@ -158,7 +157,7 @@ export class HomeComponent implements OnInit {
                 "4": {
                   "terms": {
                     "field": "Branch",
-                    "size": 5,
+                    "size": 10,
                     "order": {
                       "_count": "desc"
                     }
@@ -167,7 +166,7 @@ export class HomeComponent implements OnInit {
                     "5": {
                       "terms": {
                         "field": "Name_of_the_company .keyword",
-                        "size": 5,
+                        "size": 1000,
                         "order": {
                           "_count": "desc"
                         }
@@ -331,7 +330,7 @@ export class HomeComponent implements OnInit {
   }
 
   listCompilation(){
-  
+    this.DispResList.clear();
     var i, k, l, j;
     var count2017 = "", count2016 = "", count2015 = "", count2014 = "", count2013 = "", count2012 = "";
    
