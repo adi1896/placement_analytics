@@ -22,6 +22,8 @@ import {ElasticsearchService} from './elasticsearch.service';
 import { SignupComponent } from './components/signup/signup.component';
 import { AdsComponent } from './components/ads/ads.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { AdsenseModule } from 'ng2-adsense';
+
 
 
 
@@ -53,7 +55,12 @@ const appRoutes: Routes =[
     HttpModule,
     NgxPaginationModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AdsenseModule.forRoot({
+      adClient: 'ca-pub-2339792171787324',
+      adSlot: 7694040287,
+    })
+
   ],
   providers: [ServiceService,ElasticsearchService],
   bootstrap: [AppComponent]
