@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Pipe, PipeTransform } from '@angular/core';
 import { uniqueList } from './uniqueList';
 import { ServiceService } from '../../service.service';
 import { HttpClient } from '@angular/common/http';
