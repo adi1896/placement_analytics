@@ -35,6 +35,8 @@ export class HomeComponent implements OnInit {
   clgname: any;
   resultsFound: boolean;
   public loading = false;
+  moreinfo = new Set();
+  info: any;
 
 
 
@@ -217,152 +219,151 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.listCompilation()
-
   }
+  LinktoCollege(college_name, state, city) {
+    var blah = "blah blah"
+    console.log(college_name, state, city);
 
-  // EP_College(college, state, city) {
-  //   this.DispResList.clear();
-  //   let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
-  //   let search = new URLSearchParams();
-  //   //console.log("Page Index(elasticPOst):", this.pageNo)
-  //   let obj ={
-  //     "query": {
-  //       "bool": {
-  //         "must": [
-  //           {
-  //             "query_string": {
-  //               "query": "*",
-  //               "analyze_wildcard": false
-  //             }
-  //           },
-  //           {
-  //             "query_string": {
-  //               "query": "*",
-  //               "analyze_wildcard": false
-  //             }
-  //           },
-  //           {
-  //             "range": {
-  //               "Date": {
-  //                 "gte": 1370456813443,
-  //                 "lte": 1528223213444,
-  //                 "format": "epoch_millis"
-  //               }
-  //             }
-  //           },
-  //            {
-  //                     "match": {
-  //                       "State": state
-  //                     }
-  //                   },
-  //                   {
-  //                     "match": {
-  //                       "City": city
-  //                     }
-  //                   }
-  //         ],
-  //         "must_not": []
-  //       }
-  //     },
-  //     "size": 0,
-  //     "_source": {
-  //       "excludes": []
-  //     },
-  //     "aggs": {
-  //       "2": {
-  //         "terms": {
-  //           "field": "Full_Name",
-  //           "size": 5,
-  //           "order": {
-  //             "_count": "desc"
-  //           }
-  //         },
-  //         "aggs": {
-  //           "3": {
-  //             "terms": {
-  //               "field": "Batch",
-  //               "size": 5,
-  //               "order": {
-  //                 "_count": "desc"
-  //               }
-  //             },
-  //             "aggs": {
-  //               "4": {
-  //                 "terms": {
-  //                   "field": "Branch",
-  //                   "size": 5,
-  //                   "order": {
-  //                     "_count": "desc"
-  //                   }
-  //                 },
-  //                 "aggs": {
-  //                   "5": {
-  //                     "terms": {
-  //                       "field": "Name_of_the_company .keyword",
-  //                       "size": 5,
-  //                       "order": {
-  //                         "_count": "desc"
-  //                       }
-  //                     }
-  //                   }
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   };
-  //   this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
-  //     elasticresults => { this.elasticresults = elasticresults; this.setPage(1); });
-  //   console.log("ELASTICRESULT", this.elasticresults);
+    this.moreinfo.clear();
+    let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
+    let search = new URLSearchParams();
+    //console.log("Page Index(elasticPOst):", this.pageNo)
+    let obj = {
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "query_string": {
+                "query": "*",
+                "analyze_wildcard": false
+              }
+            },
+            {
+              "query_string": {
+                "query": "*",
+                "analyze_wildcard": false
+              }
+            },
+            {
+              "range": {
+                "Date": {
+                  "gte": 1370456813443,
+                  "lte": 1528223213444,
+                  "format": "epoch_millis"
+                }
+              }
+            },
+            {
+              "match": {
+                "Full_Name": college_name
+              }
+            },
+            {
+              "match": {
+                "State": state
+              }
+            },
+            {
+              "match": {
+                "City": city
+              }
+            }
+          ],
+          "must_not": []
+        }
+      },
+      "size": 0,
+      "_source": {
+        "excludes": []
+      },
+      "aggs": {
+        "2": {
+          "terms": {
+            "field": "Full_Name",
+            "size": 5,
+            "order": {
+              "_count": "desc"
+            }
+          },
+          "aggs": {
+            "3": {
+              "terms": {
+                "field": "Batch",
+                "size": 5,
+                "order": {
+                  "_count": "desc"
+                }
+              },
+              "aggs": {
+                "4": {
+                  "terms": {
+                    "field": "Branch",
+                    "size": 5,
+                    "order": {
+                      "_count": "desc"
+                    }
+                  },
+                  "aggs": {
+                    "5": {
+                      "terms": {
+                        "field": "Name_of_the_company .keyword",
+                        "size": 5,
+                        "order": {
+                          "_count": "desc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+    this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
+      info => { this.info = info; this.setPage(1); });
+    console.log("COLLEGE_INFO", this.info);
 
-  //     var i, k, l, j;
-  //     var count2017 = "", count2016 = "", count2015 = "", count2014 = "", count2013 = "", count2012 = "";
+    var i, k, l, j;
+    //  var count2017 = "", count2016 = "", count2015 = "", count2014 = "", count2013 = "", count2012 = "";
 
-  //   for(i=0; i< this.elasticresults.aggregations[2].buckets.length; i++)
-  //   {
-  //     for(j=0; j< this.elasticresults.aggregations[2].buckets[i][3].buckets.length; j++)
-  //     {
-  //       // for(k=0; k< this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets.length; k++)
-  //       // {
-  //       //   for(l=0; l< this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets.length; l++)
-  //       //   {
-  //           if("2017" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
-  //           {
-  //              count2017 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
-  //           }
-  //           if("2016" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
-  //           {
-  //              count2016 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
-  //           }
-  //           if("2015" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
-  //           {
-  //              count2015 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
-  //           }
-  //           if("2014" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
-  //           {
-  //              count2014 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
-  //           }
-  //           if("2013" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
-  //           {
-  //              count2013 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
-  //           }
-  //           if("2012" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key)
-  //           {
-  //              count2012 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
-  //           }            
-  //       //   }
-  //       // }
-  //        }
-  //        this.DispResList.add ({"college" : this.elasticresults.aggregations[2].buckets[i].key, "c2k17":count2017, "c2k16" :count2016, "c2k15" :count2015, "c2k14" : count2014, "c2k13": count2013, "c2k12": count2012
-  //           // "branch": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k].key, "company": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets[l].key,
-  //           } );
-  //   }
+    for (i = 0; i < this.info.aggregations[2].buckets.length; i++) {
+      // count2017 = "", count2016 = "", count2015 = "", count2014 = "", count2013 = "", count2012 = "";
+      for (j = 0; j < this.elasticresults.aggregations[2].buckets[i][3].buckets.length; j++) {
 
-  //   console.log("DISPRESLIST:", this.DispResList);
-  // }
+        // if ("2017" == this.info.aggregations[2].buckets[i][3].buckets[j].key) {
+        //   count2017 = this.info.aggregations[2].buckets[i][3].buckets[j].doc_count;
+        // }
+        // if ("2016" == this.info.aggregations[2].buckets[i][3].buckets[j].key) {
+        //   count2016 = this.info.aggregations[2].buckets[i][3].buckets[j].doc_count;
+        // }
+        // if ("2015" == this.info.aggregations[2].buckets[i][3].buckets[j].key) {
+        //   count2015 = this.info.aggregations[2].buckets[i][3].buckets[j].doc_count;
+        // }
+        // if ("2014" == this.info.aggregations[2].buckets[i][3].buckets[j].key) {
+        //   count2014 = this.info.aggregations[2].buckets[i][3].buckets[j].doc_count;
+        // }
+        // if ("2013" == this.info.aggregations[2].buckets[i][3].buckets[j].key) {
+        //   count2013 = this.info.aggregations[2].buckets[i][3].buckets[j].doc_count;
+        // }
+        // if ("2012" == this.info.aggregations[2].buckets[i][3].buckets[j].key) {
+        //   count2012 = this.info.aggregations[2].buckets[i][3].buckets[j].doc_count;
+        // }
+        //   }
+        // }
+        for (k = 0; k < this.info.aggregations[2].buckets[i][3].buckets[j][4].buckets.length; k++) {
+          for (l = 0; l < this.info.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets.length; l++) {
+            this.moreinfo.add({
+              "college": this.info.aggregations[2].buckets[i].key, "batch": this.info.aggregations[2].buckets[i][3].buckets[j].key,
+              "count": this.info.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets[l].doc_count,
+              "branch": this.info.aggregations[2].buckets[i][3].buckets[j][4].buckets[k].key, "company": this.info.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets[l].key,
+            });
+          }
+        }
+      }
+    }
+  }
 
   listCompilation() {
     this.DispResList.clear();
@@ -395,15 +396,11 @@ export class HomeComponent implements OnInit {
 
       }
       this.DispResList.add({ "college": this.elasticresults.aggregations[2].buckets[i].key, "c2k17": count2017, "c2k16": count2016, "c2k15": count2015, "c2k14": count2014, "c2k13": count2013, "c2k12": count2012 });
-      // "branch": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k].key, "company": this.elasticresults.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets[l].key,
-
-      // console.log("DOONE", this.DispResList);
     }
 
     console.log("DISPRESLIST:", this.DispResList);
 
   }
-
 
   PostForUList() {
     this.DispResList.clear();
@@ -515,53 +512,7 @@ export class HomeComponent implements OnInit {
       }
     }
   }
-  //   searchresult(country, state, city) {
-  //     console.log("hellooooooldksncoldsino", country, state, city)
-  //     let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
-  //     let search = new URLSearchParams();
-
-  //     let obj = {
-  //       "size": 20,
-  //       "from": 0,
-  //       "query": {
-  //         "bool": {
-  //           "should": [
-  //             {
-  //               "match": {
-  //                 "State": state
-  //               }
-  //             },
-  //             {
-  //               "match": {
-  //                 "City": city
-  //               }
-  //             }
-  //           ]
-  //         }
-  //       }
-  //     };
-  //     var json = JSON.stringify(obj);
-  //     var data = 'json=' + json;
-  //     //  this.http.post('http://192.168.0.2:8182/html/postdata.php', JSON.stringify(obj), {headers: headers}).map(res => res.json()).subscribe(results => {console.log(results);});
-  //     this.http.post('http://192.168.0.3:9200/jobs1/_search?pretty&filter_path=hits.hits._source', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
-  //       elasticresults => {
-  //         this.elasticresults = elasticresults;
-  //       });
-  //     console.log("Hello1", this.elasticresults);
-  //     console.log(this.elasticresults.hits.hits)
-  //     this.elasticresults = this.elasticresults.hits.hits;
-  //     var x: any;
-  //     for (x in this.elasticresults.hits.hits) {
-  //       //this.autoMake = posts.autosFound.autoMake.filter((x, i, a) => x && a.indexOf(x) === i);
-  //       console.log("new");
-  //       if (this.elasticresults.hits.hits[x]._source.Batch) {
-  //         this.year.add(this.elasticresults[x]._source.Batch);
-  //         console.log("yaeadardaerrse", this.year)
-  //       }
-  //     }
-  //   }
 }
-
 interface result {
   Country: string;
   State: string;

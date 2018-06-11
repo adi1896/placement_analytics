@@ -26,15 +26,15 @@
 
           <div class="form-group col-md-3">
 
-            <select class="form-control"  name="city" [(ngModel)]="model.city"
+            <select class="form-control" (change)="elasticPost(clgname.value,country.value,model.state,model.city)" name="city" [(ngModel)]="model.city"
               style="height: 50px;font-size: 18px;">
               <option value="" style="display:none">CITY</option>
-              <option *ngFor="let c of city" [ngValue]="c">{{c}}</option>
+              <option *ngFor="let c of city"  [ngValue]="c">{{c}}</option>
             </select>
           </div>
           <div class="form-group col-md-3 text-center">
 
-            <button class="button" (click)="elasticPost(clgname.value,country.value,model.state,model.city)" type="submit">Submit</button>
+            <button class="button" (click)="listCompilation(submit_)" type="submit">Submit</button>
 
           </div>
         </div>
@@ -119,75 +119,100 @@
           <ng-template #showResultsFound>
 
 
-        <table class="table table-striped" align="center" style="font-size: 13px;">
-          <caption>List of Colleges</caption>
-          <thead>
-            <tr>
-              <th scope="col">Sr.No</th>
-              <th scope="col">Name of the College</th>
-              <th scope="col">Batch 2k17</th>
-              <th scope="col">Batch 2k16</th>
-              <th scope="col">Batch 2k15</th>
-              <th scope="col">Batch 2k14</th>
-              <th scope="col">Batch 2k13</th>
-              <th scope="col">Batch 2k12</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr *ngFor="let r of DispResList |  paginate: { itemsPerPage:5, currentPage: p }; let i = index">
-              <td>{{i + 1}}</td>
-              <td>{{r.college}}</td>
-              <td>{{r.c2k17}}</td>
-              <td>{{r.c2k16}}</td>
-              <td>{{r.c2k15}}</td>
-              <td>{{r.c2k14}}</td>
-              <td>{{r.c2k13}}</td>
-              <td>{{r.c2k12}}</td>
-            </tr>
-          </tbody>
-        </table>
-</ng-template>
-        <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
-        <!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-  <li [ngClass]="{disabled:pager.currentPage === 1}">
-      <a (click)="setPage(1)">First</a>
-  </li>
-  <li [ngClass]="{disabled:pager.currentPage === 1}">
-      <a (click)="setPage(pager.currentPage - 1)">Previous</a>
-  </li>
-  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-      <a (click)="setPage(page)">{{page}}</a>
-  </li>
-  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-      <a (click)="setPage(pager.currentPage + 1)">Next</a>
-  </li>
-  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-      <a (click)="setPage(pager.totalPages)">Last</a>
-  </li>
-</ul> -->
-
-        <br>
-        <div class="col-lg-12 content">
-          <h2>Placement99</h2>
-          <h3>WOIR was formed by three friends in 2015 keeping in vision the innovative line of products. We have opened our
-            center in Telecom Nagar @ Hyderabad. WOIR Software India Pvt. Ltd. , a startup aiming for innovative line of
-            products has focus on Big Data Analytics. We also take work related to the domain and execute them with assured
-            quality and in time. Also, we offer job oriented course designed by industry experts – and we are sure that those
-            course will help in availing new opportunities to both experienced and freshers.</h3>
-
-          <!--<ul>
-                <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                <li><i class="ion-android-checkmark-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-              </ul>-->
-
+            <table class="table table-striped" align="center" style="font-size: 13px;">
+              <caption>List of Colleges</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Sr.No</th>
+                  <th scope="col">Name of the College</th>
+                  <th scope="col">Batch 2k17</th>
+                  <th scope="col">Batch 2k16</th>
+                  <th scope="col">Batch 2k15</th>
+                  <th scope="col">Batch 2k14</th>
+                  <th scope="col">Batch 2k13</th>
+                  <th scope="col">Batch 2k12</th>
+                </tr>
+              </thead>
+    
+              <tbody>
+                <tr *ngFor="let r of DispResList |  paginate: { itemsPerPage:5, currentPage: p }; let i = index">
+                    <td>{{i + 1}}</td>
+                    <td (click)="LinktoCollege(r.college,model.state,model.city)" >{{r.college}}</td>  
+                    <td>{{r.c2k17}}</td>  
+                    <td>{{r.c2k16}}</td>  
+                    <td>{{r.c2k15}}</td>  
+                    <td>{{r.c2k14}}</td>  
+                    <td>{{r.c2k13}}</td>  
+                    <td>{{r.c2k12}}</td>  
+                </tr>
+              </tbody>
+           </table>
+    
+           <table class="table table-striped" align="center" style="font-size: 13px;">
+            <caption>List of Colleges</caption>
+            <thead>
+              <tr>
+                <th scope="col">Sr.No</th>
+                <th scope="col">Name of the College</th>
+                <th scope="col">Batch</th>
+                <th scope="col">Branch</th>
+                <th scope="col">Company</th>
+                <th scope="col">No. of grads placed</th>
+    
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr *ngFor="let result of moreinfo |  paginate: { itemsPerPage:5, currentPage: p }; let i = index">
+                  <td>{{i + 1}}</td>
+                  <td>{{result.college}}</td>  
+                  <td>{{result.batch}}</td>  
+                  <td>{{result.branch}}</td>  
+                  <td>{{result.company}}</td>  
+                  <td>{{result.count}}</td>  
+              </tr>
+            </tbody>
+         </table>
+    </ng-template>
+           <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+    <!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(1)">First</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+          <a (click)="setPage(page)">{{page}}</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.currentPage + 1)">Next</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.totalPages)">Last</a>
+      </li>
+    </ul> -->
+           
+            <br>
+            <div class="col-lg-12 content">
+              <h2>Placement99</h2>
+              <h3>WOIR was formed by three friends in 2015 keeping in vision the innovative line of products. We have opened our
+                center in Telecom Nagar @ Hyderabad. WOIR Software India Pvt. Ltd. , a startup aiming for innovative line of
+                products has focus on Big Data Analytics. We also take work related to the domain and execute them with assured
+                quality and in time. Also, we offer job oriented course designed by industry experts – and we are sure that those
+                course will help in availing new opportunities to both experienced and freshers.</h3>
+    
+              <!--<ul>
+                    <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                    <li><i class="ion-android-checkmark-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                    <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                  </ul>-->
+    
+            </div>
+          </section>
         </div>
-      </section>
-    </div>
-    <div class="col-md-3">
-      <app-ads></app-ads>
-    </div>
-
-  </div>
-</section>
+        <div class="col-md-3"></div>
+    
+      </div>
+    </section>
+    
