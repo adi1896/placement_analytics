@@ -3,6 +3,11 @@
     <div class="form">
       <form method="post" role="form" class="contactForm">
         <div class="form-row">
+          <div class="form-group col-md-12">
+            <input type="text" class="form-control" name="clgname" #clgname style="height: 50px;font-size: 18px;">
+          </div>
+        </div>
+        <div class="form-row">
 
           <div class="form-group col-md-3">
 
@@ -21,14 +26,15 @@
 
           <div class="form-group col-md-3">
 
-            <select class="form-control" (change)="elasticPost(country.value,model.state,model.city)" name="city" [(ngModel)]="model.city" style="height: 50px;font-size: 18px;">
+            <select class="form-control"  name="city" [(ngModel)]="model.city"
+              style="height: 50px;font-size: 18px;">
               <option value="" style="display:none">CITY</option>
               <option *ngFor="let c of city" [ngValue]="c">{{c}}</option>
             </select>
           </div>
           <div class="form-group col-md-3 text-center">
 
-            <button class="button" (click)="listCompilation()" type="submit">Submit</button>
+            <button class="button" (click)="elasticPost(clgname.value,country.value,model.state,model.city)" type="submit">Submit</button>
 
           </div>
         </div>
@@ -39,7 +45,7 @@
 <section>
   <div class="col-md-12">
     <div class="col-md-2">
-        <app-ads></app-ads>
+      <app-ads></app-ads>
       <!-- <div>
         <div align="center" class="label_under" style="border:2px solid #dddddd;background-color:#50d8af;color:white;">
 
@@ -106,6 +112,11 @@
     <div class="col-md-7">
 
       <section>
+          <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+          <div *ngIf="resultsFound; then showResultsFound else  showNotFound"></div>
+          <ng-template #showNotFound></ng-template>
+          <ng-template #showResultsFound>
 
 
         <table class="table table-striped" align="center" style="font-size: 13px;">
@@ -125,20 +136,20 @@
 
           <tbody>
             <tr *ngFor="let r of DispResList |  paginate: { itemsPerPage:5, currentPage: p }; let i = index">
-                <td>{{i + 1}}</td>
-                <td>{{r.college}}</td>  
-                <td>{{r.c2k17}}</td>  
-                <td>{{r.c2k16}}</td>  
-                <td>{{r.c2k15}}</td>  
-                <td>{{r.c2k14}}</td>  
-                <td>{{r.c2k13}}</td>  
-                <td>{{r.c2k12}}</td>  
+              <td>{{i + 1}}</td>
+              <td>{{r.college}}</td>
+              <td>{{r.c2k17}}</td>
+              <td>{{r.c2k16}}</td>
+              <td>{{r.c2k15}}</td>
+              <td>{{r.c2k14}}</td>
+              <td>{{r.c2k13}}</td>
+              <td>{{r.c2k12}}</td>
             </tr>
           </tbody>
-       </table>
-
-       <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
-<!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        </table>
+</ng-template>
+        <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+        <!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
   <li [ngClass]="{disabled:pager.currentPage === 1}">
       <a (click)="setPage(1)">First</a>
   </li>
@@ -155,7 +166,7 @@
       <a (click)="setPage(pager.totalPages)">Last</a>
   </li>
 </ul> -->
-       
+
         <br>
         <div class="col-lg-12 content">
           <h2>Placement99</h2>
@@ -175,7 +186,7 @@
       </section>
     </div>
     <div class="col-md-3">
-        <app-ads></app-ads>
+      <app-ads></app-ads>
     </div>
 
   </div>
