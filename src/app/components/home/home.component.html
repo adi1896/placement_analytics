@@ -4,39 +4,39 @@
       <form method="post" role="form" class="contactForm">
         <div class="form-row">
           <div class="form-group col-md-12">
-            <input type="text" class="form-control" name="clgname" #clgname style="height: 50px;font-size: 18px;">
+            <input type="text" class="form-control" (change)="elasticPost(clgname.value,country.value,model.state,model.city)" name="clgname" #clgname style="height: 50px;font-size: 18px;" placeholder="Search by college name">
           </div>
         </div>
         <div class="form-row">
 
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-4">
 
             <select class="form-control" name="country" #country style="height: 50px;font-size: 18px;">
               <option value="" style="display:none">COUNTRY</option>
               <option value="India" selected>India</option>
             </select>
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-4">
 
             <select class="form-control" name="state" [(ngModel)]="model.state" (change)='getcity(model.state)' style="height: 50px;font-size: 18px;">
-              <option value="" style="display:none">STATE</option>
+              <option [ngValue]="" style="display:none">STATE</option>
               <option *ngFor="let b of this.uniqueList.aggregations[2].buckets" [ngValue]="b.key">{{b.key}}</option>
             </select>
           </div>
 
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-4">
 
-            <select class="form-control"  name="city" [(ngModel)]="model.city"
+            <select class="form-control"  name="city" [(ngModel)]="model.city" (change)="elasticPost(clgname.value,country.value,model.state,model.city)"
               style="height: 50px;font-size: 18px;">
               <option value="" style="display:none">CITY</option>
               <option *ngFor="let c of city"  [ngValue]="c">{{c}}</option>
             </select>
           </div>
-          <div class="form-group col-md-3 text-center">
+          <!-- <div class="form-group col-md-3 text-center">
 
             <button class="button" (click)="elasticPost(clgname.value,country.value,model.state,model.city)" type="submit">Submit</button>
 
-          </div>
+          </div> -->
         </div>
       </form>
     </div>
@@ -112,6 +112,7 @@
     <div class="col-md-7">
 
       <section>
+
           <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
 
           <div *ngIf="resultsFound; then showResultsFound else  showNotFound"></div>
@@ -137,7 +138,7 @@
               <tbody>
                 <tr *ngFor="let r of DispResList |  paginate: { itemsPerPage:5, currentPage: p }; let i = index">
                     <td>{{i + 1}}</td>
-                    <td (click)="LinktoCollege(r.college,country.value,model.state,model.city)" >{{r.college}}</td>  
+                    <td data-toggle="collapse" data-target="#demo" class="pointadv" (click)="LinktoCollege(r.college,country.value,model.state,model.city)" >{{r.college}}</td>  
                     <td>{{r.c2k17}}</td>  
                     <td>{{r.c2k16}}</td>  
                     <td>{{r.c2k15}}</td>  
@@ -145,9 +146,9 @@
                     <td>{{r.c2k13}}</td>  
                     <td>{{r.c2k12}}</td>  
                 </tr>
-              </tbody>
-           </table>
-    
+              <tr>
+                <td  colspan="8">
+           <div id="demo" class="collapse">
            <table class="table table-striped" align="center" style="font-size: 13px;">
             <caption>List of Colleges</caption>
             <thead>
@@ -173,6 +174,11 @@
               </tr>
             </tbody>
          </table>
+         </div>
+         </td>
+         </tr>
+        </tbody>
+      </table>
     </ng-template>
            <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
     <!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
@@ -209,6 +215,8 @@
                   </ul>-->
     
             </div>
+            <ng-adsense> </ng-adsense>
+
           </section>
         </div>
         <div class="col-md-3"></div>
