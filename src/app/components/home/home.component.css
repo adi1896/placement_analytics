@@ -16,3 +16,9 @@
     padding-right: 0px;
 
 }
+.pointadv:hover{
+  color:#50d8af;
+}
+.pointadv {
+    cursor: pointer;
+}

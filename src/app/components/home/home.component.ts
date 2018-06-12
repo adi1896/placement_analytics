@@ -147,6 +147,8 @@ export class HomeComponent implements OnInit {
         }
         this.DispResList.add({ "college": this.elasticresults.aggregations[2].buckets[i].key, "c2k17": count2017, "c2k16": count2016, "c2k15": count2015, "c2k14": count2014, "c2k13": count2013, "c2k12": count2012 });
       }
+      console.log("DISPRESLIST:", this.DispResList);
+
 
       if (this.elasticresults.aggregations[2].buckets.length > 0) {
         this.loading = false;
@@ -156,9 +158,9 @@ export class HomeComponent implements OnInit {
         this.resultsFound = false;
       }
     });
-    this.listCompilation()
+    //this.listCompilation()
   }
-  LinktoCollege(college_name,country, state, city) {
+  LinktoCollege(college_name,country="India", state="Telangana", city="Hyderabad") {
     var blah = "blah blah"
     this.moreinfo.clear();
     this.dataService.elasticPost(college_name, country, state, city).subscribe((info) => {
@@ -196,127 +198,7 @@ export class HomeComponent implements OnInit {
         this.loading = false;
       }
     });
-    // console.log(college_name, state, city);
-
-    // this.moreinfo.clear();
-    // let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
-    // let search = new URLSearchParams();
-    // //console.log("Page Index(elasticPOst):", this.pageNo)
-    // let obj = {
-    //   "query": {
-    //     "bool": {
-    //       "must": [
-    //         {
-    //           "query_string": {
-    //             "query": "*",
-    //             "analyze_wildcard": false
-    //           }
-    //         },
-    //         {
-    //           "query_string": {
-    //             "query": "*",
-    //             "analyze_wildcard": false
-    //           }
-    //         },
-    //         {
-    //           "range": {
-    //             "Date": {
-    //               "gte": 1370456813443,
-    //               "lte": 1528223213444,
-    //               "format": "epoch_millis"
-    //             }
-    //           }
-    //         },
-    //         {
-    //           "match": {
-    //             "Full_Name": college_name
-    //           }
-    //         },
-    //         {
-    //           "match": {
-    //             "State": state
-    //           }
-    //         },
-    //         {
-    //           "match": {
-    //             "City": city
-    //           }
-    //         }
-    //       ],
-    //       "must_not": []
-    //     }
-    //   },
-    //   "size": 0,
-    //   "_source": {
-    //     "excludes": []
-    //   },
-    //   "aggs": {
-    //     "2": {
-    //       "terms": {
-    //         "field": "Full_Name",
-    //         "size": 5,
-    //         "order": {
-    //           "_count": "desc"
-    //         }
-    //       },
-    //       "aggs": {
-    //         "3": {
-    //           "terms": {
-    //             "field": "Batch",
-    //             "size": 5,
-    //             "order": {
-    //               "_count": "desc"
-    //             }
-    //           },
-    //           "aggs": {
-    //             "4": {
-    //               "terms": {
-    //                 "field": "Branch",
-    //                 "size": 5,
-    //                 "order": {
-    //                   "_count": "desc"
-    //                 }
-    //               },
-    //               "aggs": {
-    //                 "5": {
-    //                   "terms": {
-    //                     "field": "Name_of_the_company .keyword",
-    //                     "size": 5,
-    //                     "order": {
-    //                       "_count": "desc"
-    //                     }
-    //                   }
-    //                 }
-    //               }
-    //             }
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // };
-    // this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers }).map(res => res.json()).subscribe(
-    //   info => { this.info = info; this.setPage(1); });
-    // console.log("COLLEGE_INFO", this.info);
-
-    // var i, k, l, j;
-
-    // for (i = 0; i < this.info.aggregations[2].buckets.length; i++) {
-    //   for (j = 0; j < this.elasticresults.aggregations[2].buckets[i][3].buckets.length; j++) {
-
-    
  
-    //     for (k = 0; k < this.info.aggregations[2].buckets[i][3].buckets[j][4].buckets.length; k++) {
-    //       for (l = 0; l < this.info.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets.length; l++) {
-    //         this.moreinfo.add({
-    //           "college": this.info.aggregations[2].buckets[i].key, "batch": this.info.aggregations[2].buckets[i][3].buckets[j].key,
-    //           "count": this.info.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets[l].doc_count,
-    //           "branch": this.info.aggregations[2].buckets[i][3].buckets[j][4].buckets[k].key, "company": this.info.aggregations[2].buckets[i][3].buckets[j][4].buckets[k][5].buckets[l].key,
-    //         });
-    //       }
-    //     }
-    //   }
-    // }
   }
 
   listCompilation() {
@@ -440,16 +322,76 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
-    var a: any;
-    this.http.get('http://192.168.0.3:9200/jobs1/_search?pretty&filter_path=hits').map(res => res.json()).subscribe(
-      list_jobs1 => {
-        this.list_jobs1 = list_jobs1;
-        this.dataCount = this.list_jobs1.hits.total;
-        console.log("DataCount:", this.dataCount);
-      }
-    );
+    // var a: any;
+    // this.http.get('http://192.168.0.3:9200/jobs1/_search?pretty&filter_path=hits').map(res => res.json()).subscribe(
+    //   list_jobs1 => {
+    //     this.list_jobs1 = list_jobs1;
+    //     this.dataCount = this.list_jobs1.hits.total;
+    //     console.log("DataCount:", this.dataCount);
+    //   }
+    // );
 
     this.uniqueList = new uniqueList().getJsonCategeries();
+
+
+    this.resultsFound = true;
+    this.loading = true;
+    
+    this.dataService.elasticPost1().subscribe((elasticresults) => {
+    console.log("ELASTICRESULT", elasticresults);
+    this.resultsFound = true;
+
+
+      if (elasticresults) {
+        this.elasticresults = elasticresults;
+      }
+      else {
+        this.elasticresults = ["No results found", "No results found", "No results found", "No results found", "No results found", "No results found", "No results found", "No results found"];
+      }
+      this.DispResList.clear();
+
+      var i, k, l, j;
+      var count2017 = "", count2016 = "", count2015 = "", count2014 = "", count2013 = "", count2012 = "";
+  
+      for (i = 0; i < this.elasticresults.aggregations[2].buckets.length; i++) {
+        var count2017 = "", count2016 = "", count2015 = "", count2014 = "", count2013 = "", count2012 = "";
+  
+        for (j = 0; j < this.elasticresults.aggregations[2].buckets[i][3].buckets.length; j++) {
+  
+          if ("2017" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key) {
+            count2017 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }
+          if ("2016" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key) {
+            count2016 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }
+          if ("2015" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key) {
+            count2015 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }
+          if ("2014" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key) {
+            count2014 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }
+          if ("2013" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key) {
+            count2013 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }
+          if ("2012" == this.elasticresults.aggregations[2].buckets[i][3].buckets[j].key) {
+            count2012 = this.elasticresults.aggregations[2].buckets[i][3].buckets[j].doc_count;
+          }
+  
+        }
+        this.DispResList.add({ "college": this.elasticresults.aggregations[2].buckets[i].key, "c2k17": count2017, "c2k16": count2016, "c2k15": count2015, "c2k14": count2014, "c2k13": count2013, "c2k12": count2012 });
+      }
+      console.log("DISPRESLIST:", this.DispResList);
+
+
+      if (this.elasticresults.aggregations[2].buckets.length > 0) {
+        this.loading = false;
+        this.resultsFound = true;
+      } else {
+        this.loading = false;
+        this.resultsFound = false;
+      }
+    });
+
   }
   getcity(state) {
     var key: any;
