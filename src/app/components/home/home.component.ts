@@ -15,6 +15,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
 
   uniqueList: any;
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
   elasticresults: any;
   uniqueresultList = new Set();
   city = new Set();
+  stateList = new Set();
   year = new Set();
   results: result[];
   countresults: any;
@@ -38,7 +40,8 @@ export class HomeComponent implements OnInit {
   public loading = false;
   moreinfo = new Set();
   info: any;
-
+  sort:any;
+  cityList:any;
 
 
   // array of all items to be paged
@@ -90,7 +93,8 @@ export class HomeComponent implements OnInit {
       endPage: endPage,
       startIndex: startIndex,
       endIndex: endIndex,
-      pages: pages
+      pages: pages,
+      
     };
   }
 
@@ -156,6 +160,7 @@ export class HomeComponent implements OnInit {
         this.resultsFound = false;
       }
     });
+    this.sort(this.city);
     this.listCompilation()
   }
   LinktoCollege(college_name,country, state, city) {
@@ -450,12 +455,22 @@ export class HomeComponent implements OnInit {
     );
 
     this.uniqueList = new uniqueList().getJsonCategeries();
+    var i;
+    console.log("mahender",this.state)
+
+    for (i = 0; i < this.uniqueList.aggregations[2].buckets.length; i++) {
+            this.stateList.add(this.uniqueList.aggregations[2].buckets[i].key);
+    }
+    console.log("mahender",this.state)
+    this.uniqueList1=Array.from(this.stateList.values()).sort();
+
   }
   getcity(state) {
     var key: any;
     var val: any;
     var i, j;
     this.city.clear();
+    
     for (i = 0; i < this.uniqueList.aggregations[2].buckets.length; i++) {
       if (this.uniqueList.aggregations[2].buckets[i].key == state) {
         for (j = 0; j < this.uniqueList.aggregations[2].buckets[i][3].buckets.length; j++) {
@@ -465,6 +480,8 @@ export class HomeComponent implements OnInit {
         }
       }
     }
+    this.cityList=Array.from(this.city.values()).sort();
+
   }
 }
 interface result {
