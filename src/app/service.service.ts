@@ -227,4 +227,55 @@ export class ServiceService {
   
     }
 
+    EP_Total(clgname = null, country = "India", state = null, city = null) {
+      this.clgname='*'+clgname+'*'
+      console.log("helleoe",this.clgname)
+      let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
+      let search = new URLSearchParams();
+    
+      let obj = {
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "query_string": {
+                  "query": "*",
+                  "analyze_wildcard": false
+                }
+              },
+              {
+                "query_string": {
+                  "query": "*",
+                  "analyze_wildcard": false
+                }
+              },
+              {
+                "range": {
+                  "Date": {
+                    "gte": 1371314781626,
+                    "lte": 1529081181626,
+                    "format": "epoch_millis"
+                  }
+                }
+              }
+            ],
+            "must_not": []
+          }
+        },
+        "size": 0,
+        "_source": {
+          "excludes": []
+        },
+        "aggs": {
+          "2": {
+            "cardinality": {
+              "field": "Full_Name"
+            }
+          }
+        }
+      };
+      return this.http.post('http://192.168.0.3:9200/jobs1/_search', JSON.stringify(obj), { headers: headers })
+      .map(res => res.json()) ;
+  
+    }
  }

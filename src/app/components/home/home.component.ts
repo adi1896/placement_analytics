@@ -42,6 +42,14 @@ export class HomeComponent implements OnInit {
   info: any;
   sort:any;
   cityList:any;
+  total_college: any;
+  total_state: any;
+  total_city: any;
+
+  get totalValue()
+  {
+    return this.total_college;
+  }
 
 
   // array of all items to be paged
@@ -326,6 +334,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+    
 
     this.uniqueList = new uniqueList().getJsonCategeries();
     var i;
@@ -333,7 +342,17 @@ export class HomeComponent implements OnInit {
     for (i = 0; i < this.uniqueList.aggregations[2].buckets.length; i++) {
             this.stateList.add(this.uniqueList.aggregations[2].buckets[i].key);
     }
-    console.log("mahender",this.state)
+    this.total_city = 0;
+    for(i = 0; i < this.uniqueList.aggregations[2].buckets.length; i++)
+    {
+      this.total_city = this.total_city + this.uniqueList.aggregations[2].buckets[i][3].buckets.length;
+      console.log("m here")
+    }
+    console.log("mahender",this.stateList)
+    this.total_state = this.uniqueList.aggregations[2].buckets.length
+    console.log("TOTAL_STATE:", this.total_state);
+    console.log("TOTAL_CITY:", this.total_city);
+
     this.uniqueList1=Array.from(this.stateList.values()).sort();
 
 
@@ -343,7 +362,6 @@ export class HomeComponent implements OnInit {
     this.dataService.elasticPost1().subscribe((elasticresults) => {
     console.log("ELASTICRESULT", elasticresults);
     this.resultsFound = true;
-
 
       if (elasticresults) {
         this.elasticresults = elasticresults;
@@ -395,6 +413,12 @@ export class HomeComponent implements OnInit {
       }
     });
 
+    this.dataService.EP_Total().subscribe((col_total) => {
+      console.log("COLL TOTAL", col_total);
+      this.total_college = col_total.aggregations[2].value
+      console.log("COLLEGE NO.:", this.total_college);
+    });
+   
   }
   getcity(state) {
     var key: any;
