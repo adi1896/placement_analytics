@@ -24,16 +24,18 @@ import { AdsComponent } from './components/ads/ads.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AdsenseModule } from 'ng2-adsense';
 import { LoadingModule } from 'ngx-loading';
+import { FormComponent } from './components/form/form.component';
 
 
 
 
 
 const appRoutes: Routes =[
-  {path:'',component:HeaderComponent},
+  {path:'',component:HomeComponent},
+  {path:'form',component:FormComponent}
 
 
-] 
+] ;
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +51,7 @@ const appRoutes: Routes =[
     LoginComponent,
     SignupComponent,
     AdsComponent,
+    FormComponent,
   
   ],
   imports: [
