@@ -227,6 +227,66 @@ export class ServiceService {
 
   }
 
+  elasticPost_form(clgname = null, country = "India", state = null, city = null)
+  {
+    let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
+    let search = new URLSearchParams();
+    this.clgname="*"+clgname+"*";
+    let obj = {
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "wildcard": {
+                "Full_Name": this.clgname
+              }
+            },
+            {
+              "match": {
+                "State": state
+              }
+            },
+            {
+              "match": {
+                "City": city
+              }
+            }
+          ]
+        }
+      }
+    }
+
+    return this.http.post('http://192.168.0.3:9200/jobs1/_search/', JSON.stringify(obj), { headers: headers })
+      .map(res => res.json());
+  }
+
+  elasticPost1_form()
+  {
+    let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
+    let search = new URLSearchParams();
+    let obj = {
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "match": {
+                "State": "Telangana"
+              }
+            },
+            {
+              "match": {
+                "City": "Hyderabad"
+              }
+            }
+          ]
+        }
+      }
+    }
+
+    return this.http.post('http://192.168.0.3:9200/jobs1/_search/', JSON.stringify(obj), { headers: headers })
+      .map(res => res.json());
+  }
+
   EP_Total(clgname = null, country = "India", state = null, city = null) {
     this.clgname = '*' + clgname + '*'
     console.log("helleoe", this.clgname)
@@ -279,32 +339,9 @@ export class ServiceService {
 
   }
 
-  RESPONSE_TOTAL() {
-    let headers = new Headers({ 'Content-Type': "application/x-www-form-urlencoded" });
-    let search = new URLSearchParams();
-    let obj = {
-      "query": {
-        "bool": {
-          "must": [
-            {
-              "match": {
-                "State": "Telangana"
-              }
-            },
-            {
-              "match": {
-                "City": "Hyderabad"
-              }
-            }
-
-          ]
-        }
-      }
-    }
-
-    return this.http.post('http://192.168.0.3:9200/jobs1/_search/', JSON.stringify(obj), { headers: headers })
-      .map(res => res.json());
+  EP_stateCity(clgname = null, country = "India", state = null, city = null) {
   }
+
 
   UPDATE(id, key, value) {
     console.log("helooooooo", id, key, value);
